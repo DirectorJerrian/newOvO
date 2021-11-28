@@ -23,4 +23,4 @@
 /nbdist/
 /.nb-gradle/
 /build/
-[http] postBuffer = 524288000
+[http] postBuffer = 1048576000
