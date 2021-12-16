@@ -225,6 +225,21 @@ VALUES (2, 199, 20, 20, 1, 'BigBed'),
     ENABLE KEYS */;
 COMMIT;
 
+DROP TABLE IF EXISTS `Occupancy`;
+CREATE TABLE `Occupancy`
+(
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `orderId` int(11) NOT NULL,
+    `hotelId` int(11) NOT NULL,
+    `roomType` varchar(255) NOT NULL,
+    `checkInDate` varchar(255) DEFAULT NULL,
+    `checkOutDate` varchar(255) DEFAULT NULL,
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`orderId`) REFERENCES OrderList(`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+
 --
 -- Table structure for table `User`
 --

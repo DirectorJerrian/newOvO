@@ -33,7 +33,7 @@ public interface HotelService {
      * @param roomType
      * @param rooms
      */
-    void updateRoomInfo(Integer hotelId, String roomType,Integer rooms);
+    void updateRoomOccupancy(Integer orderId, Integer hotelId, String roomType, String checkInDate, String checkOutDate, Integer rooms);
 
     /**
      * 列表获取酒店信息
@@ -64,7 +64,7 @@ public interface HotelService {
      * @param roomType
      * @return
      */
-    int getRoomCurNum(Integer hotelId,String roomType);
+    int getRoomCurNum(Integer hotelId,String roomType,String checkInDate,String checkOutDate);
 
     ResponseVO updateHotelInfo(int id, String name,String bizRegion, String description);
     /** @param cover */

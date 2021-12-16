@@ -1,8 +1,10 @@
 package com.example.hotel.blImpl.hotel;
 
 import com.example.hotel.bl.hotel.RoomService;
+import com.example.hotel.data.hotel.OccupiedMapper;
 import com.example.hotel.data.hotel.RoomMapper;
-import com.example.hotel.po.Hotel;
+import com.example.hotel.enums.RoomType;
+import com.example.hotel.po.Occupancy;
 import com.example.hotel.vo.RoomVO;
 import com.example.hotel.po.HotelRoom;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,8 @@ public class RoomServiceImpl implements RoomService {
 
     @Autowired
     private RoomMapper roomMapper;
+    @Autowired
+    private OccupiedMapper occupiedMapper;
 
     @Override
     public List<HotelRoom> retrieveHotelRoomInfo(Integer hotelId) {
@@ -28,13 +32,30 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public void updateRoomInfo(Integer hotelId, String roomType, Integer rooms) {
-        roomMapper.updateRoomInfo(hotelId,roomType,rooms);
+    public void updateRoomInfo(Integer orderId, Integer hotelId, String roomType, String checkInDate, String checkOutDate, Integer rooms) {
+        if(rooms>0){
+            Occupancy occupancy = new Occupancy();
+            occupancy.setOrderId(orderId);
+            occupancy.setHotelId(hotelId);
+            occupancy.setCheckInDate(checkInDate);
+            occupancy.setCheckOutDate(checkOutDate);
+            occupancy.setRoomType(RoomType.valueOf(roomType));
+            for(int i=0; i<rooms; i++){
+                occupiedMapper.insertOccupancy(occupancy);
+            }
+        }
+        else if(rooms<0){
+            occupiedMapper.deleteOccupancy(orderId);
+        } else{
+            System.out.println("Rooms Number Error!");
+        }
     }
 
     @Override
-    public int getRoomCurNum(Integer hotelId, String roomType) {
-        return roomMapper.getRoomCurNum(hotelId,roomType);
+    public int getRoomCurNum(Integer hotelId, String roomType, String checkInDate, String checkOutDate) {
+        int occupied = occupiedMapper.getOccupiedNumber(hotelId, roomType, checkInDate, checkOutDate);
+        int total = roomMapper.getRoomTotalNum(hotelId, roomType);
+        return total-occupied;
     }
 
     @Override

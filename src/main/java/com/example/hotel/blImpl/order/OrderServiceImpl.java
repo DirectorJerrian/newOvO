@@ -70,7 +70,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public ResponseVO addOrder(OrderVO orderVO) {
         int reserveRoomNum = orderVO.getRoomNum();
-        int curNum = hotelService.getRoomCurNum(orderVO.getHotelId(),orderVO.getRoomType());
+        int curNum = hotelService.getRoomCurNum(orderVO.getHotelId(),orderVO.getRoomType(),orderVO.getCheckInDate(),orderVO.getCheckOutDate());
         //是否有充足房间
         if(reserveRoomNum>curNum){
             return ResponseVO.buildFailure(ROOMNUM_LACK);
@@ -96,8 +96,8 @@ public class OrderServiceImpl implements OrderService {
             orderVO.setPhoneNumber(user.getPhoneNumber());
             Order order = new Order();
             BeanUtils.copyProperties(orderVO,order);
-            orderMapper.addOrder(order);
-            hotelService.updateRoomInfo(orderVO.getHotelId(),orderVO.getRoomType(),orderVO.getRoomNum());
+            int orderId = orderMapper.addOrder(order);
+            hotelService.updateRoomOccupancy(orderId, orderVO.getHotelId(),orderVO.getRoomType(),orderVO.getCheckInDate(),orderVO.getCheckOutDate(),orderVO.getRoomNum());
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return ResponseVO.buildFailure(RESERVE_ERROR);
@@ -162,7 +162,7 @@ public class OrderServiceImpl implements OrderService {
             //orderVO.setOrderState("已取消");
             //在数据库中更改状态
             orderMapper.annulOrder(orderid);
-            hotelService.updateRoomInfo(order.getHotelId(),order.getRoomType(),-reserveRoomNum);
+            hotelService.updateRoomOccupancy(orderid, order.getHotelId(),order.getRoomType(),order.getCheckInDate(),order.getCheckOutDate(),-reserveRoomNum);
         }catch (Exception e) {
             System.out.println(e.getMessage());
             return ResponseVO.buildFailure(ANNUL_ERROR);

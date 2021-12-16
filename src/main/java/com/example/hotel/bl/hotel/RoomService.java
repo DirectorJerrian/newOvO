@@ -26,7 +26,7 @@ public interface RoomService {
      * @param roomType
      * @param rooms
      */
-    void updateRoomInfo(Integer hotelId, String roomType, Integer rooms);
+    void updateRoomInfo(Integer orderId, Integer hotelId, String roomType, String checkInDate, String checkOutDate, Integer rooms);
 
     /**
      * 获取酒店指定房间剩余数量
@@ -34,7 +34,7 @@ public interface RoomService {
      * @param roomType
      * @return
      */
-    int getRoomCurNum(Integer hotelId, String roomType);
+    int getRoomCurNum(Integer hotelId, String roomType, String checkInDate, String checkOutDate);
 
     /**
      * 增加totalNum

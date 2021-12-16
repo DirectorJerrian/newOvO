@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.hotel.data.hotel.OccupiedMapper">
+
+    <insert id="insertOccupancy" parameterType="com.example.hotel.po.Occupancy"
+    useGeneratedKeys="true" keyProperty="id">
+        insert into occupancy(orderId, hotelId, roomType, checkInDate, checkOutDate)
+        values (#{orderId}, #{hotelId}, #{roomType}, #{checkInDate}, #{checkOutDate})
+    </insert>
+
+    <select id="getOccupiedNumber">
+        select count(*) from occupancy
+        where hotelId=#{hotelId}
+        and roomType=#{roomType}
+        and checkInDate&gt;=#{checkIndate}
+        and checkOutDate&lt;=#{checkOutDate}
+    </select>
+
+    <delete id="deleteOccupancy">
+        delete from occupancy where orderId=#{orderId}
+    </delete>
+
+</mapper>
