@@ -113,8 +113,8 @@ public class OrderServiceTest {
         orderVO.setPhoneNumber(user.getPhoneNumber());
         Order order = new Order();
         BeanUtils.copyProperties(orderVO,order);
-        orderMapper.addOrder(order);
-        hotelService.updateRoomInfo(orderVO.getHotelId(),orderVO.getRoomType(),orderVO.getRoomNum());
+        int orderId = orderMapper.addOrder(order);
+        hotelService.updateRoomOccupancy(orderId,orderVO.getHotelId(),orderVO.getRoomType(),order.getCheckInDate(), order.getCheckOutDate(), orderVO.getRoomNum());
         List<Order> allOrder=orderService.getHotelUserOrders(1,5);
         Order target=new Order();
         for(Order item: allOrder){

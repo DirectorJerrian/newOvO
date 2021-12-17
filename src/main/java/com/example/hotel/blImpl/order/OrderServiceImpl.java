@@ -96,8 +96,8 @@ public class OrderServiceImpl implements OrderService {
             orderVO.setPhoneNumber(user.getPhoneNumber());
             Order order = new Order();
             BeanUtils.copyProperties(orderVO,order);
-            int orderId = orderMapper.addOrder(order);
-            hotelService.updateRoomOccupancy(orderId, orderVO.getHotelId(),orderVO.getRoomType(),orderVO.getCheckInDate(),orderVO.getCheckOutDate(),orderVO.getRoomNum());
+            orderMapper.addOrder(order);
+            hotelService.updateRoomOccupancy(order.getId(), orderVO.getHotelId(),orderVO.getRoomType(),orderVO.getCheckInDate(),orderVO.getCheckOutDate(),orderVO.getRoomNum());
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return ResponseVO.buildFailure(RESERVE_ERROR);

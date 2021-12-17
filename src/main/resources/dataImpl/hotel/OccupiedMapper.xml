@@ -8,11 +8,11 @@
         values (#{orderId}, #{hotelId}, #{roomType}, #{checkInDate}, #{checkOutDate})
     </insert>
 
-    <select id="getOccupiedNumber">
+    <select id="getOccupiedNumber" resultType="int">
         select count(*) from occupancy
         where hotelId=#{hotelId}
         and roomType=#{roomType}
-        and checkInDate&gt;=#{checkIndate}
+        and checkInDate&gt;=#{checkInDate}
         and checkOutDate&lt;=#{checkOutDate}
     </select>
 
