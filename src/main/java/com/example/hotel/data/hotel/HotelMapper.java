@@ -21,7 +21,7 @@ public interface HotelMapper {
 
     List<String> getCities();
 
-    List<HotelVO> selectQualifiedHotel(@Param("city") String bizRegion, @Param("rate") Integer rate);
+    List<HotelVO> selectCityQualifiedHotel(@Param("city") String city);
 
     HotelVO selectById(@Param("id") Integer id);
 

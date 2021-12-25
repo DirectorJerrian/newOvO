@@ -9,6 +9,7 @@ import com.example.hotel.data.hotel.HotelMapper;
 import com.example.hotel.data.hotel.RoomMapper;
 import com.example.hotel.enums.City;
 import com.example.hotel.enums.HotelStar;
+import com.example.hotel.enums.RoomType;
 import com.example.hotel.enums.UserType;
 import com.example.hotel.po.Hotel;
 import com.example.hotel.po.HotelRoom;
@@ -89,7 +90,6 @@ public class HotelServiceImpl implements HotelService {
 
     @Override
     public List<HotelVO> retrieveHotels() {
-
         return hotelMapper.selectAllHotel();
     }
 
@@ -139,23 +139,21 @@ public class HotelServiceImpl implements HotelService {
     }
 
 
-    //酒店搜索
+    //按地点和日期筛选可用酒店
     @Override
-    public List<HotelVO> hotelSearch(HotelSearchVO hotelSearchVO){
-        List<HotelVO> firstChoose=hotelMapper.selectQualifiedHotel(hotelSearchVO.getBizRegion(),hotelSearchVO.getRate());
+    public List<HotelVO> availableHotel(String city, String checkInDate, String checkOutDate){
+        List<HotelVO> first=hotelMapper.selectCityQualifiedHotel(city);
         List<HotelVO> ans=new ArrayList<>();
-        System.out.println("酒店的数量为"+firstChoose.size());
-        for(HotelVO i: firstChoose){
-            //满足条件为真
-            if(starSatisfaction(hotelSearchVO.getStar(),i)&&roomSatisfaction(hotelSearchVO.getRoomType(),i.getId())&&nameSatisfaction(hotelSearchVO.getHotelName(),i.getName())){
-                ans.add(i);
-                System.out.println(i.getId());
+        for(int i=0; i<first.size(); i++){
+            HotelVO hotel = first.get(i);
+            if(getRoomCurNum(hotel.getId(), RoomType.BigBed.toString(), checkInDate, checkOutDate)>0
+                || getRoomCurNum(hotel.getId(), RoomType.DoubleBed.toString(), checkInDate, checkOutDate)>0
+                || getRoomCurNum(hotel.getId(), RoomType.Family.toString(), checkInDate, checkOutDate)>0){
+                    ans.add(hotel);
             }
         }
-
-
         return ans;
-    };
+    }
 
     @Override
     public List<HotelVO> getTargetHotel(int userid) {

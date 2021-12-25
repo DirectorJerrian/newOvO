@@ -1,10 +1,7 @@
 package com.example.hotel.bl.hotel;
 
-import com.example.hotel.po.HotelRoom;
-import com.example.hotel.po.Order;
 import com.example.hotel.util.ServiceException;
-import com.example.hotel.vo.CouponVO;
-import com.example.hotel.vo.HotelSearchVO;
+import com.example.hotel.vo.AvailableHotelVO;
 import com.example.hotel.vo.HotelVO;
 import com.example.hotel.vo.ResponseVO;
 import org.springframework.web.multipart.MultipartFile;
@@ -42,10 +39,9 @@ public interface HotelService {
     List<HotelVO> retrieveHotels();
 
     /**
-    * TODO
      * 改为根据日期和地点搜索有可用房间的酒店
-    * */
-    List<HotelVO> hotelSearch(HotelSearchVO hotelSearchVO);
+     */
+    List<HotelVO> availableHotel(String city, String checkInDate, String checkOutDate);
 
     /**
      * 列表获取管理员管理目标酒店列表

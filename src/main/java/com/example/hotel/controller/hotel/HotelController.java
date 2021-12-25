@@ -4,7 +4,6 @@ import com.example.hotel.bl.hotel.HotelService;
 import com.example.hotel.bl.hotel.RoomService;
 import com.example.hotel.util.ServiceException;
 import com.example.hotel.vo.*;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -86,20 +85,9 @@ public class HotelController {
 
 
     @GetMapping("/hotelSearch")
-    public ResponseVO hotelSearch(@RequestParam String hotelName,
-                                  @RequestParam String bizRegion,
-                                  @RequestParam String roomType,
-                                  @RequestParam Integer hotelStar,
-                                  @RequestParam Integer rate
-                                  ) {
-        HotelSearchVO hotelSearchVO=new HotelSearchVO();
-        hotelSearchVO.setHotelName(hotelName);
-        hotelSearchVO.setBizRegion(bizRegion);
-        hotelSearchVO.setRoomType(roomType);
-        hotelSearchVO.setStar(hotelStar);
-        hotelSearchVO.setRate(rate);
-        List<HotelVO> ans=hotelService.hotelSearch(hotelSearchVO);
-        if(ans==null)return ResponseVO.buildFailure("不存在该类型酒店");
+    public ResponseVO availableHotel(@RequestParam String city,@RequestParam String checkInDate,@RequestParam String checkOutDate) {
+        List<HotelVO> ans=hotelService.availableHotel(city, checkInDate, checkOutDate);
+        if(ans.size()==0)return ResponseVO.buildFailure("所选城市和时间段内不存在可用酒店");
         else return ResponseVO.buildSuccess(ans);
     }
 

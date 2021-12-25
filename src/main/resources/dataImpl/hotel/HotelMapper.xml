@@ -19,9 +19,8 @@
         select city from Hotel
     </select>
 
-    <select id="selectQualifiedHotel" resultMap="Hotel">
-        select * from Hotel
-        where city=#{city} and rate<![CDATA[ >= ]]>#{rate}
+    <select id="selectCityQualifiedHotel" resultMap="Hotel">
+        select * from Hotel where city=#{city}
     </select>
 
     <select id="selectById" resultMap="Hotel">
