@@ -19,7 +19,7 @@
             <a-form-item label="商圈" v-bind="formItemLayout">
                 <a-input
                         placeholder="请填写商圈"
-                        v-decorator="['bizRegion', {initialValue:this.currentHotelInfo.bizRegion, rules: [{ required: true, message: '请输入商圈' }] }]"
+                        v-decorator="['city', {initialValue:this.currentHotelInfo.city, rules: [{ required: true, message: '请输入城市' }] }]"
                 />
             </a-form-item>
             <a-form-item label="简介" v-bind="formItemLayout">
@@ -79,7 +79,7 @@
                 _this.coverImg=this.currentHotelInfo.cover,
                 _this.form.setFieldsValue({
                     'hotelName': this.currentHotelInfo.name,
-                    'bizRegion': this.currentHotelInfo.bizRegion,
+                    'city': this.currentHotelInfo.city,
                     'description': this.currentHotelInfo.description,
                 })
             }*/
@@ -122,7 +122,7 @@
                     if (!err) {
                         const data = {
                             name: this.form.getFieldValue('hotelName'),
-                            bizRegion: this.form.getFieldValue('bizRegion'),
+                            city: this.form.getFieldValue('city'),
                             description: this.form.getFieldValue('description'),
                         }
                         this.updateHotelInfo(data).then(() => {

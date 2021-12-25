@@ -40,8 +40,10 @@ public interface HotelService {
      * @return
      */
     List<HotelVO> retrieveHotels();
+
     /**
-    * 获取目标酒店信息
+    * TODO
+     * 改为根据日期和地点搜索有可用房间的酒店
     * */
     List<HotelVO> hotelSearch(HotelSearchVO hotelSearchVO);
 

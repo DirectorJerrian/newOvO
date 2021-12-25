@@ -49,9 +49,9 @@
                         <RoomList :rooms="currentHotelInfo.rooms"></RoomList>
                     </a-tab-pane>
                     <a-tab-pane tab="酒店详情" key="2">
-                        <div class="a" v-if="currentHotelInfo.bizRegion">
+                        <div class="a" v-if="currentHotelInfo.city">
                             <span class="label">商圈:</span>
-                            <span class="value">{{ currentHotelInfo.bizRegion }}</span>
+                            <span class="value">{{ currentHotelInfo.city }}</span>
                         </div>
                         <div class="a" v-if="currentHotelInfo.phoneNum">
                             <span class="label">联系电话:</span>

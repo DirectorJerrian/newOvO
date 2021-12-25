@@ -1,13 +1,14 @@
 package com.example.hotel.enums;
 
-public enum BizRegion {
-    XiDan("西单"),
-    XinJieKou("新街口"),
-    PuDong("浦东");
+public enum City {
+    Beijing("北京"),
+    Nanjing("南京"),
+    Chongqing("重庆"),
+    Shanghai("上海");
 
     private String value;
 
-    BizRegion(String value) {
+    City(String value) {
         this.value = value;
     }
 

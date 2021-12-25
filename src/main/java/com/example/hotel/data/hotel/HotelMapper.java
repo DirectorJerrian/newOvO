@@ -19,9 +19,9 @@ public interface HotelMapper {
 
     List<HotelVO> selectAllHotel();
 
-    List<String> getBizRegions();
+    List<String> getCities();
 
-    List<HotelVO> selectQualifiedHotel(@Param("bizRegion") String bizRegion, @Param("rate") Integer rate);
+    List<HotelVO> selectQualifiedHotel(@Param("city") String bizRegion, @Param("rate") Integer rate);
 
     HotelVO selectById(@Param("id") Integer id);
 
@@ -29,7 +29,7 @@ public interface HotelMapper {
 
     int setRate(@Param("id") int id,@Param("rate") double rate);
 
-    int updateHotel(@Param("id") int id,@Param("hotelName") String name, @Param("bizRegion") String bizRegion,@Param("hotelDescription") String description);
+    int updateHotel(@Param("id") int id,@Param("hotelName") String name, @Param("city") String city,@Param("hotelDescription") String description);
 
     /** @param cover*/
     int updateCoverURL(@Param("id") int id,@Param("cover") String cover);

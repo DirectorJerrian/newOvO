@@ -4,17 +4,14 @@ import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
 import com.example.hotel.bl.hotel.HotelService;
 import com.example.hotel.bl.hotel.RoomService;
-import com.example.hotel.bl.order.OrderService;
 import com.example.hotel.bl.user.AccountService;
 import com.example.hotel.data.hotel.HotelMapper;
 import com.example.hotel.data.hotel.RoomMapper;
-import com.example.hotel.data.user.AccountMapper;
-import com.example.hotel.enums.BizRegion;
+import com.example.hotel.enums.City;
 import com.example.hotel.enums.HotelStar;
 import com.example.hotel.enums.UserType;
 import com.example.hotel.po.Hotel;
 import com.example.hotel.po.HotelRoom;
-import com.example.hotel.po.Order;
 import com.example.hotel.po.User;
 import com.example.hotel.util.ServiceException;
 import com.example.hotel.vo.*;
@@ -26,7 +23,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -63,7 +59,7 @@ public class HotelServiceImpl implements HotelService {
         hotel.setPhoneNum(hotelVO.getPhoneNum());
         hotel.setManagerId(hotelVO.getManagerId());
         hotel.setRate(hotelVO.getRate());
-        hotel.setBizRegion(BizRegion.valueOf(hotelVO.getBizRegion()));
+        hotel.setCity(City.valueOf(hotelVO.getCity()));
         hotel.setHotelStar(HotelStar.valueOf(hotelVO.getHotelStar()));
         hotelMapper.insertHotel(hotel);
     }
@@ -185,10 +181,10 @@ public class HotelServiceImpl implements HotelService {
         return hotelVO;
     }
 
-    //获取当前所有的商圈（不重复）
+    //获取当前所有的城市（不重复）
     @Override
     public List<String> getBizRegions(){
-        List<String>firstchoose=hotelMapper.getBizRegions();
+        List<String>firstchoose=hotelMapper.getCities();
         if(firstchoose.size()<2)return firstchoose;
         else{
             List<String> ans=new ArrayList<>();
@@ -213,12 +209,12 @@ public class HotelServiceImpl implements HotelService {
         return hotelMapper.findHotel(hotelName);
     }
 
-    ;
+
     //更新酒店信息
     @Override
-    public ResponseVO updateHotelInfo(int id, String name, String bizRegion, String description) {
+    public ResponseVO updateHotelInfo(int id, String name, String city, String description) {
         try {
-            hotelMapper.updateHotel(id, name, bizRegion, description);
+            hotelMapper.updateHotel(id, name, city, description);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return ResponseVO.buildFailure(UPDATE_ERROR);

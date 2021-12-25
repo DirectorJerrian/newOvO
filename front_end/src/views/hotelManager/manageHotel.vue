@@ -122,8 +122,8 @@ const columns1 = [
         dataIndex: 'name',
     },
     {
-        title: '商圈',
-        dataIndex: 'bizRegion',
+        title: '城市',
+        dataIndex: 'city',
     },
     {
         title: '地址',

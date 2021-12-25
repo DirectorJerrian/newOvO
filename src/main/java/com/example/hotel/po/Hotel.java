@@ -1,6 +1,6 @@
 package com.example.hotel.po;
 
-import com.example.hotel.enums.BizRegion;
+import com.example.hotel.enums.City;
 import com.example.hotel.enums.HotelStar;
 
 public class Hotel {
@@ -8,9 +8,9 @@ public class Hotel {
     private String hotelName;
     private String address;
     /**
-     * 商圈
+     * 城市
      */
-    private BizRegion bizRegion;
+    private City city;
     private HotelStar hotelStar;
     private Double rate;
     private String description;
@@ -45,12 +45,12 @@ public class Hotel {
         this.address = address;
     }
 
-    public BizRegion getBizRegion() {
-        return bizRegion;
+    public City getCity() {
+        return city;
     }
 
-    public void setBizRegion(BizRegion bizRegion) {
-        this.bizRegion = bizRegion;
+    public void setCity(City city) {
+        this.city = city;
     }
 
     public HotelStar getHotelStar() {

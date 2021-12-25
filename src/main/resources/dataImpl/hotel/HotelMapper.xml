@@ -3,8 +3,8 @@
 <mapper namespace="com.example.hotel.data.hotel.HotelMapper">
     <insert id="insertHotel" parameterType="com.example.hotel.po.Hotel"
     useGeneratedKeys="true" keyProperty="id">
-        insert into Hotel(address,bizRegion,hotelDescription,hotelStar,hotelName,phoneNum,rate,manager_id)
-        values (#{address},#{bizRegion},#{description},#{hotelStar},#{hotelName},#{phoneNum},#{rate},#{managerId})
+        insert into Hotel(address,city,hotelDescription,hotelStar,hotelName,phoneNum,rate,manager_id)
+        values (#{address},#{city},#{description},#{hotelStar},#{hotelName},#{phoneNum},#{rate},#{managerId})
     </insert>
 
     <delete id="deleteHotel">
@@ -15,13 +15,13 @@
         select * from Hotel
     </select>
 
-    <select id="getBizRegions" resultMap="bizRegion">
-        select bizRegion from Hotel
+    <select id="getCities" resultMap="city">
+        select city from Hotel
     </select>
 
     <select id="selectQualifiedHotel" resultMap="Hotel">
         select * from Hotel
-        where bizRegion=#{bizRegion} and rate<![CDATA[ >= ]]>#{rate}
+        where city=#{city} and rate<![CDATA[ >= ]]>#{rate}
     </select>
 
     <select id="selectById" resultMap="Hotel">
@@ -38,7 +38,7 @@
     </update>
 
     <update id="updateHotel">
-        update Hotel set hotelName=#{hotelName},bizRegion=#{bizRegion},hotelDescription=#{hotelDescription}
+        update Hotel set hotelName=#{hotelName},city=#{city},hotelDescription=#{hotelDescription}
         where id=#{id}
     </update>
 
@@ -50,7 +50,7 @@
     <resultMap id="Hotel" type="com.example.hotel.vo.HotelVO">
         <id column="id" property="id"></id>
         <result column="address" property="address"></result>
-        <result column="bizRegion" property="bizRegion"></result>
+        <result column="city" property="city"></result>
         <result column="hotelDescription" property="description"></result>
         <result column="hotelStar" property="hotelStar"></result>
         <result column="hotelName" property="name"></result>
@@ -61,8 +61,8 @@
 
     </resultMap>
 
-    <resultMap id="bizRegion" type="String">
-        <result column="bizRegion" property="bizRegion"></result>
+    <resultMap id="city" type="String">
+        <result column="city" property="city"></result>
 
     </resultMap>
 

@@ -1,17 +1,12 @@
 package com.example.hotel.vo;
 
-import com.example.hotel.enums.BizRegion;
-import com.example.hotel.enums.HotelStar;
-import com.example.hotel.po.HotelRoom;
-import com.example.hotel.po.User;
-
 import java.util.List;
 
 public class HotelVO {
     private Integer id;
     private String name;
     private String address;
-    private String bizRegion;
+    private String city;
     private String hotelStar;
     private Double rate;
     private String description;
@@ -45,12 +40,12 @@ public class HotelVO {
         this.address = address;
     }
 
-    public String getBizRegion() {
-        return bizRegion;
+    public String getCity() {
+        return city;
     }
 
-    public void setBizRegion(String bizRegion) {
-        this.bizRegion = bizRegion;
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public Double getRate() {

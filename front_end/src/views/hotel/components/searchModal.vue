@@ -14,9 +14,9 @@
                         placeholder="请输入酒店名称"></a-input>
             </a-form-item>
             <a-form-item label="商圈" v-bind="formItemLayout">
-                <a-select v-decorator="['bizRegion',
+                <a-select v-decorator="['city',
                           { rules: [{required: true, message:'请选择商圈'}]},]"
-                          placeholder="请选择商圈">
+                          placeholder="请选择城市">
                     <a-select-option v-for="item in bizRegions" :key="item" :value="item">
                         {{item}}
                     </a-select-option>
@@ -109,7 +109,7 @@
                     if (!err) {
                         const data = {
                             hotelName: this.form.getFieldValue('hotelName'),
-                            bizRegion: this.form.getFieldValue('bizRegion'),
+                            city: this.form.getFieldValue('city'),
                             roomType: this.form.getFieldValue('roomType'),
                             hotelStar: parseInt(this.form.getFieldValue('hotelStar')),
                             rate: Number(this.form.getFieldValue('rate')),
