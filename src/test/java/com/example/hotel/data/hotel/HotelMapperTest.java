@@ -35,13 +35,6 @@ class HotelMapperTest {
     }
 
     @Test
-    void getHotelTest(){
-        List<HotelVO> hotelList=hotelMapper.selectQualifiedHotel("1343296078",3);
-        HotelVO hotel=hotelList.get(0);
-        assertEquals("神仙酒店",hotel.getName());
-    }
-
-    @Test
     public void updateHotelInfo(){
         int ret=hotelMapper.updateHotel(1,"北京唐拉雅秀酒店","XiDan","北京唐拉雅秀酒店地处中央政务和金融商务区，紧邻金融街，可便捷前往天安门广场、西单商业中心。酒店位置优越，可将首都长安街壮观景致尽收眼底。");
         assertEquals(1,ret);
