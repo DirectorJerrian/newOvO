@@ -88,7 +88,7 @@
                         bordered
                 >
                     <span slot="hotelDetial" slot-scope="record">
-                         <a-button type="link" :size="size" @click="hotelDetail(record)">{{record}}</a-button>
+                         <a-button type="link" size="small" @click="hotelDetail(record)">{{record}}</a-button>
                     </span>
                     <span slot="price" slot-scope="text">
                         <span>￥{{ text }}</span>

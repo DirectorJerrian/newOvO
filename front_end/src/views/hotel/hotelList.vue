@@ -83,7 +83,8 @@ export default {
           }
           this.set_hotelListParams(data)
           this.set_hotelListLoading(true)
-          this.getHotelList()
+          //this.getHotelList()
+          this.set_hotelListLoading(false)
       },
       jumpToDetails(id){
           this.$router.push({ name: 'hotelDetail', params: { hotelId: id }})
