@@ -4,8 +4,8 @@
 
     <insert id="commitComment" parameterType="com.example.hotel.po.Comment"
             useGeneratedKeys="true" keyProperty="id">
-        insert into comments(userId,userName,hotelId,hotelName,comments,create_time)
-        values(#{userId},#{userName},#{hotelId},#{hotelName},#{comments},#{create_time})
+        insert into comments(userId,userName,hotelId,hotelName,comments,create_time,orderId)
+        values(#{userId},#{userName},#{hotelId},#{hotelName},#{comments},#{create_time},#{orderId})
     </insert>
 
     <select id="selectByUserId" resultMap="Comment">
@@ -25,5 +25,6 @@
         <result column="hotelName" property="hotelName"></result>
         <result column="comments" property="comments"></result>
         <result column="create_time" property="create_time"></result>
+        <result column="orderId" property="orderId"></result>
     </resultMap>
 </mapper>

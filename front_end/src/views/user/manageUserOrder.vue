@@ -67,11 +67,18 @@
 
                     </span>
         </a-table>
+        <rateModal :show="show" :title="title" :rateId="rateId" :rate="rate" @hideModal="hideModal" @submit="submit"
+                   @changeRate="changeRate">
+
+        </rateModal>
+        <viewModal></viewModal>
     </div>
 </template>
 
 <script>
     import {mapGetters, mapMutations, mapActions} from 'vuex'
+    import rateModal from "./rateModal";
+    import viewModal from "./components/viewModal";
 
     const moment = require('moment')
     const columns = [
@@ -139,8 +146,16 @@
                 columns,
                 form: this.$form.createForm(this, {name: 'manageUserOrder'}),
                 filterDate: '',
-                datePicker:undefined
+                datePicker:undefined,
+                title: "请对本次酒店服务做出评价",
+                show: false,
+                rateId: 0,
+                rate: 0,
             }
+        },
+        components: {
+            rateModal,
+            viewModal
         },
         computed: {
             ...mapGetters([
@@ -152,7 +167,10 @@
             await this.getUserOrders()
         },
         methods: {
-            ...mapMutations([]),
+            ...mapMutations([
+                'set_viewModalVisible',
+                'set_currentOrderInfo',
+            ]),
             ...mapActions([
                 'getUserOrders',
                 'cancelOrder',
@@ -175,6 +193,38 @@
             handleSearch(confirm,selectedKeys) {
                 confirm();
                 this.filterDate = selectedKeys[0];
+            },
+            hideModal() {
+                // 取消弹窗回调
+                this.show = false
+                this.rate
+            },
+
+            submit() {
+                // 确认弹窗回调
+                this.show = false
+                //console.log("评价的orderid是", this.rateId, "评分是", this.rate)
+                let data1 = {
+                    id: 0,
+                    rate: 0
+                };
+                data1.id = this.rateId
+                data1.rate = this.rate
+                this.orderRate(data1)
+
+            },
+            showRateModal(id) {
+                this.rateId = id
+                //console.log(id)
+                this.show = true
+            },
+            changeRate(value){
+                this.rate=value
+                //console.log("评分被改为",this.rate)
+            },
+            detail(value){
+                this.set_currentOrderInfo(value)
+                this.set_viewModalVisible(true)
             },
         }
     }

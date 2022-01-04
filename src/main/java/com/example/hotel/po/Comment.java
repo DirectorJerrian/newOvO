@@ -12,6 +12,15 @@ public class Comment {
     private String hotelName;
     private String comments;
     private String create_time;
+    private Integer orderId;
+
+    public Integer getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
+    }
 
     public Integer getId() {
         return id;
