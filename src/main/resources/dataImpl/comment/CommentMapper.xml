@@ -16,6 +16,10 @@
         select * from Comments where hotelId=#{hotelId}
     </select>
 
+    <select id="selectByCommentId" resultMap="Comment">
+        select * from Comments where id=#{id}
+    </select>
+
 
     <resultMap id="Comment" type="com.example.hotel.po.Comment">
         <result column="id" property="id"></result>

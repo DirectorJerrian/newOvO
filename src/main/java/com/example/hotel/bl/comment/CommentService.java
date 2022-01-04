@@ -31,4 +31,11 @@ public interface CommentService {
      * @return
      */
     List<Comment> getCommentsByHotelId(Integer hotelId);
+
+    /**
+     * 根据commentId获取该评论
+     * @param commentId
+     * @return
+     */
+    Comment getCommentByCommentId(Integer commentId);
 }

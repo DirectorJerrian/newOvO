@@ -19,4 +19,6 @@ public interface CommentMapper {
     List<Comment> selectByHotelId(Integer hotelId);
 
     List<Comment> selectByUserId(Integer hotelId);
+
+    Comment selectByCommentId(Integer commentId);
 }
