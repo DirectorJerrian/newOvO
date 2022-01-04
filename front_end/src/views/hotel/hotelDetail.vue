@@ -142,6 +142,7 @@ export default {
 
         this.set_curHotelId(Number(this.$route.params.hotelId))
         this.getHotelComments();
+        this.getHotelOrders();
     },
     beforeRouteUpdate(to, from, next) {
         this.set_currentHotelId(Number(to.params.hotelId))
@@ -160,6 +161,7 @@ export default {
             'getUserOrders',
             'getUserHotelOrders',
             'getHotelComments',
+            'getHotelOrders'
         ]),
         getStar(data){
             if(data=="Four") return 4;

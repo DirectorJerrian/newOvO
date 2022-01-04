@@ -69,7 +69,6 @@ export default {
     ])
   },
   async mounted() {
-    await this.getHotelOrders();
     var that=this
     that.set_currentHotelId(Number(that.hotel.id))
     await that.getUserHotelOrders(that.currentHotelId)
@@ -95,7 +94,6 @@ export default {
       'getHotelById',
       'getUserOrders',
       'getUserHotelOrders',
-      'getHotelOrders',
     ]),
     getStar(data){
       if(data=="Four") return 4;

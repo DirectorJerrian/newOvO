@@ -38,14 +38,14 @@
         },
         async mounted() {
             const that = this;
-            console.log(that.hotelOrderList)
+            // console.log(that.hotelOrderList)
             // that.set_currentHotelId(Number(that.comment.id))
             // await that.getUserHotelOrders(that.currentHotelId)
             for(const i in that.hotelOrderList){
                 if(that.hotelOrderList[i].id === Number(that.comment.orderId)){
                     that.targetOrder = that.hotelOrderList[i];
                 }
-                console.log(that.comment)
+                // console.log(that.comment)
             }
         },
         methods:{
