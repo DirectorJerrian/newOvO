@@ -54,7 +54,12 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public int getRoomCurNum(Integer hotelId, String roomType, String checkInDate, String checkOutDate) {
         int occupied = occupiedMapper.getOccupiedNumber(hotelId, roomType, checkInDate, checkOutDate);
-        int total = roomMapper.getRoomTotalNum(hotelId, roomType);
+        int total = 0;
+        try {
+            total = roomMapper.getRoomTotalNum(hotelId, roomType);
+        }catch (NullPointerException e){
+            System.out.println("该酒店不存在该类型房间");
+        }
         return total-occupied;
     }
 

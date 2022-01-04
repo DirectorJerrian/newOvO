@@ -352,3 +352,32 @@ VALUES (1,null,'新人优惠券',0.9,600,200,1,'未添加'),
 /*!40000 ALTER TABLE `Voucher`
     ENABLE KEYS */;
 COMMIT;
+
+
+/* edit by Zhangyue*/
+DROP TABLE IF EXISTS `Comments`;
+CREATE TABLE `Comments`
+(
+    `id`             int(11) not null auto_increment,
+    `userId`         int(11)      default null,
+    `userName`    varchar(255)   DEFAULT null,
+    `hotelId`      int(11)        DEFAULT null,
+    `hotelName`    varchar(255)   DEFAULT null,
+    `comments`    varchar(255) default null,
+    `create_time`    datetime default null,
+    primary key (`id`)
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 12
+  DEFAULT CHARSET = utf8;
+
+BEGIN;
+/*!40000 ALTER TABLE `Comments`
+    DISABLE KEYS */;
+INSERT INTO `Comments`
+VALUES (1,5,'测试二号',2,'儒家酒店','这个酒店真的太棒啦~！','2021-12-30'),
+       (2,5,'测试二号',2,'儒家酒店','这个酒店很不错~！','2021-12-31'),
+       (3,4,'测试一号',1,'北京唐拉雅秀酒店','4号觉得1号酒店还可以~！','2021-12-31');
+
+/*!40000 ALTER TABLE `Voucher`
+    ENABLE KEYS */;
+COMMIT;

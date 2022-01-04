@@ -1,20 +1,55 @@
 <template>
     <div>
         <div class="search">
-            <a-button icon="search" size="large" @click="search">
-                精确搜索
-            </a-button>
-            <a-dropdown>
-                <a-menu slot="overlay" @click="handleMenuClick">
-                    <a-menu-item key="1"><a-icon type="crown"></a-icon>
-                        星 级
-                    </a-menu-item>
-                    <a-menu-item key="2"><a-icon type="like"></a-icon>
-                        评 分
-                    </a-menu-item>
-                </a-menu>
-                <a-button size="large" style="margin-left: 8px; width: 120px" id="sortBtn"> 排序方式 <a-icon type="down" /> </a-button>
-            </a-dropdown>
+            <a-input-group size="large" compact>
+                <a-select
+                        v-model="searchForm.city"
+                        :not-found-content="null"
+                        :filter-option="true"
+                        :allowClear="true"
+                        style="width: 150px"
+                        placeholder="入住城市"
+                        @blur="handleCityBlur"
+                        @change="handleCityChange"
+                >
+                    <a-select-option
+                            v-for="(item,index) in cityList"
+                            :key="index"
+                            :value="item"
+                    >
+                        {{ item }}
+                    </a-select-option>
+                </a-select>
+                <a-range-picker
+                        format="YYYY-MM-DD"
+                        @change="changeDate"
+                        v-decorator="[
+                        'date',
+                        {
+                            rules: [{ required: true, message: '请选择入住时间' }]
+                        }
+                    ]"
+                        :placeholder="['入住日期','退房日期']"
+                />
+                <a-button icon="search" size="large" @click="search">
+                </a-button>
+                <a-button icon="rollback" size="large" v-if="isSearched" @click="goBackClick">
+                </a-button>
+                <a-dropdown>
+                    <a-menu slot="overlay" @click="handleMenuClick">
+                        <a-menu-item key="1"><a-icon type="crown"></a-icon>
+                            星 级
+                        </a-menu-item>
+                        <a-menu-item key="2"><a-icon type="like"></a-icon>
+                            评 分
+                        </a-menu-item>
+                    </a-menu>
+                    <a-button size="large" style="margin-left: 8px; width: 120px" id="sortBtn"> 排序方式 <a-icon type="down" /> </a-button>
+                </a-dropdown>
+            </a-input-group>
+
+
+
         </div>
         <div class="hotelList">
             <a-layout class="test">
@@ -36,7 +71,7 @@
 import HotelCard from './components/hotelCard';
 import searchModal from "./components/searchModal";
 import { mapGetters, mapActions, mapMutations } from 'vuex'
-
+const moment = require('moment')
 export default {
   name: 'home',
   components: {
@@ -45,9 +80,16 @@ export default {
   },
   data(){
       return{
+          isSearched:false,
           emptyBox: [{ name: 'box1' }, { name: 'box2'}, {name: 'box3'}],
           pageSize: 8,
           sortOrder: 0, //0为未排序，1为评分降序，2为评分升序，3为星级降序，4为星级升序
+          cityList:['北京','南京','上海'],
+          searchForm:{
+              city:'',
+              checkInDate:'',
+              checkOutDate:'',
+          }
       }
   },
   async mounted() {
@@ -79,7 +121,18 @@ export default {
           `StarSort2`,
           `RateSort`,
           `RateSort2`,
+          `searchHotel`,
       ]),
+      async goBackClick(){
+          await this.getHotelList();
+          this.isSearched=false;
+      },
+      handleCityChange(val){
+          this.searchForm.city=val;
+      },
+      handleCityBlur(val){
+        this.searchForm.city=val;
+      },
       pageChange(page, pageSize) {
           const data = {
               pageNo: page - 1
@@ -92,8 +145,10 @@ export default {
       jumpToDetails(id){
           this.$router.push({ name: 'hotelDetail', params: { hotelId: id }})
       },
-      search(){
-          this.set_searchModalVisible(true)
+      async search(){
+          const success=await this.searchHotel(this.searchForm);
+          if(success)this.isSearched=true;
+          // this.set_searchModalVisible(true)
       },
       handleMenuClick(e) {
           //console.log('click', e);
@@ -122,6 +177,10 @@ export default {
               }
           }
       },
+      changeDate(v){
+          this.searchForm.checkInDate=moment(v[0]).format('YYYY-MM-DD');
+          this.searchForm.checkOutDate=moment(v[1]).format('YYYY-MM-DD');
+      }
 
   }
 }

@@ -50,6 +50,8 @@ const getters = {
   modifyVisible: state => state.hotelManager.modifyVisible,
   //Marketingstaff
   strangeOrderList: state=>state.marketingStaff.targetorderList,
+  //comment
+  currentHotelComments: state=>state.comment.comments,
   }
   
   export default getters

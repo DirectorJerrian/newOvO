@@ -151,17 +151,16 @@ const hotel = {
 
         },
         searchHotel: async ({state, dispatch, commit},data) => {
+            console.log(data);
             const res = await hotelSearchAPI(data)
             if (res) {
-                commit('set_searchParams', {
-                        hotelName: '',
-                        bizRegion: '',
-                        roomType: '',
-                        hotelStar: '',
-                        rate: '',
-                })
-                commit('set_searchModalVisible', false)
+                console.log(res);
+                commit('set_searchParams', data)
+                // commit('set_searchModalVisible', false)
                 commit('set_hotelList',res)
+                return true;
+            }else{
+                return false;
             }
         },
         getBizRegions: async({commit,state}) =>{
