@@ -95,6 +95,7 @@
                 sortOrder: 0, //0为未排序，1为评分降序，2为评分升序，3为星级降序，4为星级升序
                 cityList: ['北京', '南京', '上海'],
                 searchForm: {
+                    city:undefined,
                     checkInDate: '',
                     checkOutDate: '',
                 }
