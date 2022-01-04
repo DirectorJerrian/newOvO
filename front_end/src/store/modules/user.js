@@ -26,13 +26,15 @@ import {
     getUserHotelOrdersAPI,
 } from '@/api/order'
 
+import{
+    commitCommentAPI,
+} from '@/api/comment'
 
 import{
     userVoucherAPI,
     userAvailableVoucherAPI,
     useVoucherAPI,
 } from "../../api/voucher";
-import {restoreOrderAPI} from "../../api/Marketingstaff";
 
 const getDefaultState = () => {
     return {
@@ -233,11 +235,22 @@ const user = {
             }
         },
         orderRate:async({ state, dispatch }, data) => {
-            const res = await orderRateAPI(data)
-            if(res){
-                dispatch('getUserOrders')
+            console.log(data);
+            let data1 = {
+                id: data.id,
+                rate: data.rate,
+            };
+            let data2 = {
+                orderId: data.id,
+                comments: data.comments,
+            };
+            const res1 = await orderRateAPI(data1);
+            const res2 = await commitCommentAPI(data2);
+            if(res2){
+                dispatch('getUserOrders');
                 message.success('评价成功')
-
+            }else{
+                message.error(res2)
             }
         },
         getUserOrders: async({ state, commit }) => {

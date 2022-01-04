@@ -67,8 +67,8 @@
 
                     </span>
         </a-table>
-        <rateModal :show="show" :title="title" :rateId="rateId" :rate="rate" @hideModal="hideModal" @submit="submit"
-                   @changeRate="changeRate">
+        <rateModal :show="show" :title="title" :rateId="rateId" :rate="rate" :comments="commments" @hideModal="hideModal" @submit="submit"
+                   @changeRate="changeRate" @changeText="changeText">
 
         </rateModal>
         <viewModal></viewModal>
@@ -151,6 +151,7 @@
                 show: false,
                 rateId: 0,
                 rate: 0,
+                commments: '',
             }
         },
         components: {
@@ -197,20 +198,21 @@
             hideModal() {
                 // 取消弹窗回调
                 this.show = false
-                this.rate
             },
 
             submit() {
                 // 确认弹窗回调
                 this.show = false
                 //console.log("评价的orderid是", this.rateId, "评分是", this.rate)
-                let data1 = {
+                let data = {
                     id: 0,
-                    rate: 0
+                    rate: 0,
+                    comments: '',
                 };
-                data1.id = this.rateId
-                data1.rate = this.rate
-                this.orderRate(data1)
+                data.id = this.rateId;
+                data.rate = this.rate;
+                data.comments = this.comments;
+                this.orderRate(data);
 
             },
             showRateModal(id) {
@@ -221,6 +223,10 @@
             changeRate(value){
                 this.rate=value
                 //console.log("评分被改为",this.rate)
+            },
+            changeText(value){
+                this.comments = value;
+                //console.log(value);
             },
             detail(value){
                 this.set_currentOrderInfo(value)

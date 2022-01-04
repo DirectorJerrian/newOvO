@@ -1,8 +1,11 @@
 package com.example.hotel.blImpl.comment;
 
 import com.example.hotel.bl.comment.CommentService;
+import com.example.hotel.bl.order.OrderService;
 import com.example.hotel.data.comment.CommentMapper;
+import com.example.hotel.data.order.OrderMapper;
 import com.example.hotel.po.Comment;
+import com.example.hotel.po.Order;
 import com.example.hotel.vo.CommentVO;
 import com.example.hotel.vo.ResponseVO;
 import org.springframework.beans.BeanUtils;
@@ -21,6 +24,8 @@ import java.util.List;
 public class CommentServiceImpl implements CommentService {
     @Autowired
     private CommentMapper commentMapper;
+    @Autowired
+    private OrderMapper orderMapper;
 
     //新增评论
     @Override
@@ -30,24 +35,29 @@ public class CommentServiceImpl implements CommentService {
         Date date = new Date(System.currentTimeMillis());
         String curdate = sf.format(date);
         commentVO.setCreate_time(curdate);
+        Order order = orderMapper.getOrderById(commentVO.getOrderId());
+        commentVO.setUserId(order.getUserId());
+        commentVO.setHotelId(order.getHotelId());
+        commentVO.setHotelName(order.getHotelName());
+        commentVO.setUserName(order.getClientName());
         Comment comment=new Comment();
         BeanUtils.copyProperties(commentVO,comment);
         commentMapper.commitComment(comment);
         return ResponseVO.buildSuccess(true);
-    };
+    }
 
     //通过用户Id获取该用户评论
     @Override
     public List<Comment> getCommentsByUserId(Integer userId){
         List<Comment> commentList=commentMapper.selectByUserId(userId);
         return commentList;
-    };
+    }
 
     //通过酒店Id获取该用户评论
     @Override
     public List<Comment> getCommentsByHotelId(Integer hotelId){
         List<Comment> commentList=commentMapper.selectByHotelId(hotelId);
         return commentList;
-    };
+    }
 
 }

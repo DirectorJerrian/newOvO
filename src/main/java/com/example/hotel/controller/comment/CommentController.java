@@ -19,7 +19,7 @@ public class CommentController {
     private CommentService commentService;
 
     @PostMapping("/addComment")
-    public ResponseVO addComment(@RequestBody CommentVO commentVO) throws ServiceException {
+    public ResponseVO addComment(@RequestBody CommentVO commentVO){
         commentService.commitComment(commentVO);
         return ResponseVO.buildSuccess(true);
     }

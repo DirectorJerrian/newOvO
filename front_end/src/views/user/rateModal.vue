@@ -4,6 +4,14 @@
             <div class="modal-header">
                 {{ title }}
             </div>
+            <div class="modal-main">
+                <a-textarea v-model="text"
+                            placeholder="请输入评价内容"
+                            :autoSize="{minRows: 3, maxRows: 4}"
+                            allow-clear
+                            @change="changeText"
+                />
+            </div>
             <div class="rate">
                 <a-rate v-model="value" @change="changeRate" :tooltips="desc" />
                 <span class="ant-rate-text">{{ desc[value - 1] }}</span>
@@ -35,6 +43,7 @@
                 },
                 value:3,
                 desc: ['很糟糕', '不太好', '一般', '优秀', '棒极了'],
+                text: '',
 
             }
         },
@@ -55,7 +64,11 @@
             rate:{
                 type:Number,
                 default:0
-            }
+            },
+            comments:{
+                type: String,
+                default: '',
+            },
         },
         methods: {
             hideModal() {
@@ -70,6 +83,11 @@
                 let value=Number(v)
                 //console.log("改变数值"+value)
                 this.$emit('changeRate',value)
+            },
+            changeText(t){
+                let text = t.target.value;
+                //console.log(text);
+                this.$emit('changeText', text)
             }
         }
     }
@@ -92,12 +110,12 @@
         position: fixed;
         top: 50%;
         left: 50%;
-        width:20%;
-        height: 15%;
+        width: 30%;
+        height: 30%;
         transform: translate(-50%,-50%);
     }
     .modal-header {
-        height: 35%;
+        height: 20%;
         background: #409EFF;
         color: #fff;
         display: flex;
@@ -105,18 +123,18 @@
         justify-content: center;
         cursor: move;
     }
+    .modal-main {
+        height: 50%;
+    }
     .rate{
-        height: 35%;
+        height: 15%;
         text-align: center;
     }
     .modal-footer {
-        height: 10%;
+        height: 5%;
         text-align: center;
     }
     .modal-footer button {
-
-    }
-    .modal-main {
 
     }
 
