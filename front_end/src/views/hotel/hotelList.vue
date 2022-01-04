@@ -39,17 +39,20 @@
                 </a-button>
                 <a-dropdown>
                     <a-menu slot="overlay" @click="handleMenuClick">
-                        <a-menu-item key="1"><a-icon type="crown"></a-icon>
+                        <a-menu-item key="1">
+                            <a-icon type="crown"></a-icon>
                             星 级
                         </a-menu-item>
-                        <a-menu-item key="2"><a-icon type="like"></a-icon>
+                        <a-menu-item key="2">
+                            <a-icon type="like"></a-icon>
                             评 分
                         </a-menu-item>
                     </a-menu>
-                    <a-button size="large" style="margin-left: 8px; width: 120px" id="sortBtn"> 排序方式 <a-icon type="down" /> </a-button>
+                    <a-button size="large" style="margin-left: 8px; width: 120px" id="sortBtn"> 排序方式
+                        <a-icon type="down"/>
+                    </a-button>
                 </a-dropdown>
             </a-input-group>
-
 
 
         </div>
@@ -58,10 +61,13 @@
                 <a-layout-content style="min-width: 800px;">
                     <a-spin :spinning="hotelListLoading">
                         <div class="card-wrapper">
-                            <HotelCard :hotel="item" v-for="item in hotelList.slice((hotelListParams.pageNo)*pageSize,(hotelListParams.pageNo+1)*pageSize)" :key="item.index" @click.native="jumpToDetails(item.id)"></HotelCard>
-<!--                            <div v-for="item in emptyBox" :key="item.name" class="emptyBox ant-col-xs-7 ant-col-lg-5 ant-col-xxl-3"></div>-->
+                            <HotelCard :hotel="item"
+                                       v-for="item in hotelList.slice((hotelListParams.pageNo)*pageSize,(hotelListParams.pageNo+1)*pageSize)"
+                                       :key="item.index" @click.native="jumpToDetails(item.id)"></HotelCard>
+                            <!--                            <div v-for="item in emptyBox" :key="item.name" class="emptyBox ant-col-xs-7 ant-col-lg-5 ant-col-xxl-3"></div>-->
                         </div>
-                        <a-pagination style="padding-top: 30px" showQuickJumper :total="hotelList.length" :pageSize.sync="pageSize"  @change="pageChange"></a-pagination>
+                        <a-pagination style="padding-top: 30px" showQuickJumper :total="hotelList.length"
+                                      :pageSize.sync="pageSize" @change="pageChange"></a-pagination>
                     </a-spin>
                 </a-layout-content>
             </a-layout>
@@ -70,44 +76,45 @@
     </div>
 </template>
 <script>
-import HotelCard from './components/hotelCard';
-import searchModal from "./components/searchModal";
-import { mapGetters, mapActions, mapMutations } from 'vuex'
-const moment = require('moment')
-export default {
-  name: 'home',
-  components: {
-      HotelCard,
-      searchModal,
-  },
-  data(){
-      return{
-          isSearched:false,
-          emptyBox: [{ name: 'box1' }, { name: 'box2'}, {name: 'box3'}],
-          pageSize: 8,
-          sortOrder: 0, //0为未排序，1为评分降序，2为评分升序，3为星级降序，4为星级升序
-          cityList:['北京','南京','上海'],
-          searchForm:{
-              checkInDate:'',
-              checkOutDate:'',
-          }
-      }
-  },
-  async mounted() {
-      const data = {
-          pageNo: 0,
-          pageSize: 8,
-      }
-      await this.set_hotelListParams(data);
-      //console.log(this.hotelListParams)
-      await this.getHotelList();
-  },
-  computed: {
-    ...mapGetters([
-        'hotelList',
-        'hotelListLoading',
-        'searchModalVisible',
-        'hotelListParams',
+    import HotelCard from './components/hotelCard';
+    import searchModal from "./components/searchModal";
+    import {mapGetters, mapActions, mapMutations} from 'vuex'
+
+    const moment = require('moment')
+    export default {
+        name: 'home',
+        components: {
+            HotelCard,
+            searchModal,
+        },
+        data() {
+            return {
+                isSearched: false,
+                emptyBox: [{name: 'box1'}, {name: 'box2'}, {name: 'box3'}],
+                pageSize: 8,
+                sortOrder: 0, //0为未排序，1为评分降序，2为评分升序，3为星级降序，4为星级升序
+                cityList: ['北京', '南京', '上海'],
+                searchForm: {
+                    checkInDate: '',
+                    checkOutDate: '',
+                }
+            }
+        },
+        async mounted() {
+            const data = {
+                pageNo: 0,
+                pageSize: 8,
+            }
+            await this.set_hotelListParams(data);
+            //console.log(this.hotelListParams)
+            await this.getHotelList();
+        },
+        computed: {
+            ...mapGetters([
+                'hotelList',
+                'hotelListLoading',
+                'searchModalVisible',
+                'hotelListParams',
 
     ])
   },
@@ -187,14 +194,15 @@ export default {
           this.searchForm.checkOutDate=moment(v[1]).format('YYYY-MM-DD');
       }
 
-  }
-}
+        }
+    }
 </script>
 <style scoped lang="less">
-    .test{
+    .test {
         border-radius: 36px;
     }
-    .search{
+
+    .search {
         margin-bottom: 50px;
         padding-bottom: 20px;
         padding-left: 50px;
@@ -205,28 +213,32 @@ export default {
         background: url('../../assets/back.jpg') no-repeat;
         background-size: cover;
     }
-  .hotelList {
-    background: transparent;
-    text-align: center;
-    padding: 50px 0;
-    padding-top: 0;
-    .emptyBox {
-      height: 0;
-      margin: 10px 10px
-    }
-    .card-wrapper{
-      display: flex;
+
+    .hotelList {
         background: transparent;
-        border-radius: 36px;
-      justify-content: space-around;
-      flex-wrap: wrap;
-      flex-grow: 3;
-      min-height: 800px
+        text-align: center;
+        padding: 50px 0;
+        padding-top: 0;
+
+        .emptyBox {
+            height: 0;
+            margin: 10px 10px
+        }
+
+        .card-wrapper {
+            display: flex;
+            background: transparent;
+            border-radius: 36px;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            flex-grow: 3;
+            min-height: 800px
+        }
+
+        .card-wrapper .card-item {
+            margin: 50px;
+            position: relative;
+            height: 188px;
+        }
     }
-    .card-wrapper .card-item {
-      margin: 50px;
-      position: relative;
-      height: 188px;
-    }
-  }
 </style>

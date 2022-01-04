@@ -93,7 +93,7 @@ export default {
     ...mapActions([
       'getHotelById',
       'getUserOrders',
-      'getUserHotelOrders'
+      'getUserHotelOrders',
     ]),
     getStar(data){
       if(data=="Four") return 4;

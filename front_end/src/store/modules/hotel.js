@@ -156,7 +156,6 @@ const hotel = {
             if(res){
                 commit('set_hotelOrderList', res)
             }
-
         },
         searchHotel: async ({state, dispatch, commit},data) => {
             console.log(data);

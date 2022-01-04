@@ -5,12 +5,12 @@ import {
 } from '@/api/comment'
 import { message } from 'ant-design-vue'
 
-
 const comment = {
     state: {
         comments: [],
         commentInDetail:'',
         currentHotelId: '',
+        commentId:0,
     },
 
     mutations: {
@@ -23,6 +23,9 @@ const comment = {
         set_commentInDetail: function (state, data) {
             state.commentInDetail = data
         },
+        set_currentCommentId: function (state, data) {
+            state.commentId = data
+        }
     },
 
     actions: {
@@ -34,8 +37,22 @@ const comment = {
                 commit('set_comments', res)
             }
         },
+        // getCommentById: async ({commit, state}) => {
+            // const res = await getCommentByIdAPI({
+            //     commentId: state.currentCommentId
+            // })
+            // if (res) {
+            //     commit('set_currentHotelInfo', res)
+                // console.log(state.currentCommentInfo)
+        //     }
+        // },
+        set_currentCommentInfo: function (state, data) {
+            state.currentCommentInfo = {
+                ...state.currentCommentInfo,
+                ...data,
+            }
+        },
         getUserComments: async ({state, commit},data) => {
-            console.log("传入的数据"+data);
             const res = await getUserCommentsAPI({userId:data});
             if (res) {
                 commit('set_comments', res)
