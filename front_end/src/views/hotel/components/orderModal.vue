@@ -263,7 +263,8 @@ export default {
     methods: {
         ...mapMutations([
             'set_orderModalVisible',
-            'set_orderInfoVisible'
+            'set_orderInfoVisible',
+            'set_successfulOrderInfo'
         ]),
         ...mapActions([
             'addOrder',
@@ -391,7 +392,9 @@ export default {
                          }
                          if(orderPass){
                              this.set_orderModalVisible(false);
+                             this.set_successfulOrderInfo(data);
                              this.set_orderInfoVisible(true);
+
                          }
                      })
                 }

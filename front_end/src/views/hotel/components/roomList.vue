@@ -25,10 +25,46 @@
                 title="您的订单已预订成功！"
                 :visible="orderInfoVisible"
                 :confirm-loading="confirmLoading"
+
+                okText="确认"
                 @ok="set_orderInfoVisible(false)"
                 @cancel="set_orderInfoVisible(false)"
         >
-
+            <div class="a">
+                <span class="l">酒店名称:</span>
+                <span class="r">{{successfulOrderInfo.hotelName}}</span>
+            </div>
+            <div class="a">
+                <span class="l">价格:</span>
+                <span class="r">{{successfulOrderInfo.price}}</span>
+            </div>
+            <div class="a">
+                <span class="l">入住时间:</span>
+                <span class="r">{{successfulOrderInfo.checkInDate}}</span>
+            </div>
+            <div class="a">
+                <span class="l">离店时间:</span>
+                <span class="r">{{successfulOrderInfo.checkOutDate}}</span>
+            </div>
+            <div class="a">
+                <span class="l">订单状态:</span>
+                <span class="r">已下单</span>
+            </div>
+            <div class="a">
+                <span class="l">房型:</span>
+                <span class="r">{{successfulOrderInfo.roomType}}</span>
+            </div>
+            <div class="a">
+                <span class="l">房间数:</span>
+                <span class="r">{{successfulOrderInfo.roomNum}}</span>
+            </div>
+            <div class="a">
+                <span class="l">入住人数:</span>
+                <span class="r">{{successfulOrderInfo.peopleNum}}</span>
+            </div>
+            <template slot="footer">
+                <a-button type="primary" @click="set_orderInfoVisible(false)">确认</a-button>
+            </template>
         </a-modal>
     </div>
 </template>
@@ -112,7 +148,8 @@ export default {
             'orderModalVisible',
             'userInfo',
             'userId',
-            'orderInfoVisible'
+            'orderInfoVisible',
+            'successfulOrderInfo'
         ])
     },
     monuted() {
@@ -153,3 +190,19 @@ export default {
     }
 }
 </script>
+<style scoped>
+    .a{
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .l{
+        display: inline-block;
+        width: 100px;
+        margin-left: 40px;
+        font-size: 15px;
+    }
+    .r{
+        margin-left: 10px;
+        font-size: 15px;
+    }
+</style>
