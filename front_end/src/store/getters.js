@@ -54,6 +54,8 @@ const getters = {
   strangeOrderList: state=>state.marketingStaff.targetorderList,
   //comment
   currentHotelComments: state=>state.comment.comments,
+  currentCommentId: state=>state.comment.commentId,
+    currentCommentInfo: state=>state.comment.currentCommentInfo,
   }
-  
+
   export default getters

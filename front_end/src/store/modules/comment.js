@@ -9,6 +9,7 @@ const comment = {
     state: {
         comments: [],
         currentHotelId: '',
+        commentId:0,
     },
 
     mutations: {
@@ -18,6 +19,9 @@ const comment = {
         set_curHotelId: function (state, data) {
             state.currentHotelId = data
         },
+        set_currentCommentId: function (state, data) {
+            state.commentId = data
+        }
     },
 
     actions: {
@@ -27,6 +31,21 @@ const comment = {
             })
             if (res) {
                 commit('set_comments', res)
+            }
+        },
+        // getCommentById: async ({commit, state}) => {
+            // const res = await getCommentByIdAPI({
+            //     commentId: state.currentCommentId
+            // })
+            // if (res) {
+            //     commit('set_currentHotelInfo', res)
+                // console.log(state.currentCommentInfo)
+        //     }
+        // },
+        set_currentCommentInfo: function (state, data) {
+            state.currentCommentInfo = {
+                ...state.currentCommentInfo,
+                ...data,
             }
         },
     },
