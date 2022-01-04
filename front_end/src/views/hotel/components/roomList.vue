@@ -21,6 +21,15 @@
             </a-table>
         </div>
         <OrderModal style="width: 70%"></OrderModal>
+        <a-modal
+                title="您的订单已预订成功！"
+                :visible="orderInfoVisible"
+                :confirm-loading="confirmLoading"
+                @ok="set_orderInfoVisible(false)"
+                @cancel="set_orderInfoVisible(false)"
+        >
+
+        </a-modal>
     </div>
 </template>
 <script>
@@ -91,7 +100,8 @@ export default {
     data() {
         return {
             columns,
-            columns1
+            columns1,
+            confirmLoading: false,
         }
     },
     components: {
@@ -101,7 +111,8 @@ export default {
         ...mapGetters([
             'orderModalVisible',
             'userInfo',
-            'userId'
+            'userId',
+            'orderInfoVisible'
         ])
     },
     monuted() {
@@ -109,7 +120,8 @@ export default {
     methods: {
         ...mapMutations([
             'set_orderModalVisible',
-            'set_currentOrderRoom'
+            'set_currentOrderRoom',
+            'set_orderInfoVisible'
         ]),
         ...mapActions([
             'addNum',
