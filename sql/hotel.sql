@@ -366,7 +366,7 @@ CREATE TABLE `Comments`
     `comments`    varchar(255) default null,
     `create_time`    datetime default null,
     `orderId`       int(11)     not null,
-    FOREIGN KEY (`orderId`) REFERENCES OrderList(`id`)
+    FOREIGN KEY (`orderId`) REFERENCES OrderList(`id`),
     primary key (`id`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 12
@@ -376,9 +376,9 @@ BEGIN;
 /*!40000 ALTER TABLE `Comments`
     DISABLE KEYS */;
 INSERT INTO `Comments`
-VALUES (1,5,'测试二号',2,'儒家酒店','这个酒店真的太棒啦~！','2021-12-30'),
-       (2,5,'测试二号',2,'儒家酒店','这个酒店很不错~！','2021-12-31'),
-       (3,4,'测试一号',1,'北京唐拉雅秀酒店','4号觉得1号酒店还可以~！','2021-12-31');
+VALUES (1,5,'测试二号',2,'儒家酒店','这个酒店真的太棒啦~！','2021-12-30',1),
+       (2,5,'测试二号',2,'儒家酒店','这个酒店很不错~！','2021-12-31',2),
+       (3,5,'测试一号',24,'上海万达瑞华酒店','4号觉得1号酒店还可以~！','2021-12-31',74);
 
 /*!40000 ALTER TABLE `Voucher`
     ENABLE KEYS */;
