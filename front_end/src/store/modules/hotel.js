@@ -157,6 +157,9 @@ const hotel = {
                 commit('set_searchParams', data)
                 // commit('set_searchModalVisible', false)
                 commit('set_hotelList',res)
+                return true;
+            }else{
+                return false;
             }
         },
         getBizRegions: async({commit,state}) =>{
