@@ -13,6 +13,7 @@ public class HotelVO {
     private String phoneNum;
     private Integer managerId;
     private String cover;
+    private Integer minimumPrice;
 
     private List<RoomVO> rooms;
 
@@ -99,4 +100,12 @@ public class HotelVO {
     public String getCover() { return cover; }
 
     public void setCover(String cover) { this.cover = cover; }
+
+    public Integer getMinimumPrice() {
+        return minimumPrice;
+    }
+
+    public void setMinimumPrice(Integer minimumPrice) {
+        this.minimumPrice = minimumPrice;
+    }
 }

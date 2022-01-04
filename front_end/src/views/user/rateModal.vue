@@ -68,7 +68,7 @@
             },
             changeRate(v){
                 let value=Number(v)
-                console.log("改变数值"+value)
+                //console.log("改变数值"+value)
                 this.$emit('changeRate',value)
             }
         }

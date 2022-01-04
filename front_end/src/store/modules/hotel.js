@@ -107,12 +107,13 @@ const hotel = {
             })
             if (res) {
                 commit('set_currentHotelInfo', res)
+                console.log(state.currentHotelInfo)
             }
         },
         addOrder:  async ({state, commit}, data) => {
             const res =  await reserveHotelAPI(data)
 
-            console.log(res)
+            ////console.log(res)
             if (res) {
                 message.success('预定成功')
                 return true
@@ -123,21 +124,21 @@ const hotel = {
         },
         addNum: async ({state,commit},data)=>{
             const res=await addRoomNumAPI(data)
-            console.log(res)
+            ////console.log(res)
         },
         subNum: async ({state,commit},data)=>{
             const res=await subRoomNumAPI(data)
-            console.log(res)
+            ////console.log(res)
         },
 
         getOrderMatchCoupons: async({ state, commit }, data) => {
             const res = await orderMatchCouponsAPI(data)
             if (res) {
                 commit('set_orderMatchCouponList', res)
-                console.log("得到coupon列表")
-                console.log(state.orderMatchCouponList)
+                ////console.log("得到coupon列表")
+                ////console.log(state.orderMatchCouponList)
             }else{
-                console.log("没得到coupon列表")
+                ////console.log("没得到coupon列表")
             }
         },
         getHotelOrders: async ({state,commit},data)=>{
@@ -184,11 +185,41 @@ const hotel = {
             commit('set_hotelList',res)
             commit('set_hotelListLoading',false)
         },
+        StarSort2: ({commit,state}) =>{
+            var res = state.hotelList
+            for(let i=0; i<res.length-1; i++){
+                for(let j=0; j<res.length-1-i; j++){
+                    if(res[j].hotelStar==="Three" || res[j].hotelStar==="Four"&&res[j+1].hotelStar==="Five"){
+                        const temp = res[j];
+                        res[j] = res[j+1]
+                        res[j+1] = temp
+                    }
+                }
+            }
+            commit('set_hotelListLoading',true)
+            commit('set_hotelList',res)
+            commit('set_hotelListLoading',false)
+        },
         RateSort: ({commit,state}) =>{
             var res = state.hotelList
             for(let i=0; i<res.length-1; i++){
                 for(let j=0; j<res.length-1-i; j++){
                     if(res[j].rate<res[j+1].rate){
+                        const temp = res[j];
+                        res[j] = res[j+1]
+                        res[j+1] = temp
+                    }
+                }
+            }
+            commit('set_hotelListLoading',true)
+            commit('set_hotelList',res)
+            commit('set_hotelListLoading',false)
+        },
+        RateSort2: ({commit,state}) =>{
+            var res = state.hotelList
+            for(let i=0; i<res.length-1; i++){
+                for(let j=0; j<res.length-1-i; j++){
+                    if(res[j].rate>res[j+1].rate){
                         const temp = res[j];
                         res[j] = res[j+1]
                         res[j+1] = temp

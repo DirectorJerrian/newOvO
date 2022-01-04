@@ -48,7 +48,7 @@ export function getUserCreditRecordAPI(data) {
 export function updateUserAvatarAPI(data,id) {
     let fd = new FormData(); //通过form数据格式来传\
     fd.append("file", data.myAvatar);
-    console.log(fd.get('file'));
+    ////console.log(fd.get('file'));
     return axios({
         withCredentials: true,
         headers: {

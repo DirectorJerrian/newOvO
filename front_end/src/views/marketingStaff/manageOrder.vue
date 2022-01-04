@@ -119,11 +119,11 @@
                 'restoreOrder',
             ]),
             mRevokeOrder(id){
-                console.log(id)
+                //console.log(id)
                 this.revokeOrder(Number(id))
             },
             mRestoreOrder(id){
-                console.log(id)
+                //console.log(id)
                 this.restoreOrder(Number(id))
             }
 

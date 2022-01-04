@@ -66,7 +66,7 @@
                 'set_viewModalVisible',
             ]),
             cancel(){
-                console.log(this.currentOrderInfo)
+                //console.log(this.currentOrderInfo)
                 this.set_viewModalVisible(false)
             },
             closeView(){

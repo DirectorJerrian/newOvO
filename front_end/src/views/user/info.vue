@@ -80,49 +80,6 @@
                     </a-form-item>
                 </a-form>
             </a-tab-pane>
-            <a-tab-pane tab="我的订单" key="2" v-if="userInfo.userType==='Client'">
-                <a-table
-                        :columns="columns"
-                        :dataSource="userOrderList"
-                        rowKey="id"
-                        bordered
-                >
-                    <span slot="hotelDetial" slot-scope="record">
-                         <a-button type="link" size="small" @click="hotelDetail(record)">{{record}}</a-button>
-                    </span>
-                    <span slot="price" slot-scope="text">
-                        <span>￥{{ text }}</span>
-                    </span>
-                    <span slot="roomType" slot-scope="text">
-                        <span v-if="text == 'BigBed'">大床房</span>
-                        <span v-if="text == 'DoubleBed'">双床房</span>
-                        <span v-if="text == 'Family'">家庭房</span>
-                    </span>
-                    <a-tag slot="orderState" color="blue" slot-scope="text">
-                        {{ text }}
-                    </a-tag>
-                    <span slot="action" slot-scope="record">
-                        <a-button type="default" size="small" @click="detail(record)">查看</a-button>
-                        <a-divider type="vertical" v-if="record.orderState == '已预订'"></a-divider>
-                        <a-popconfirm
-                                title="你确定撤销该笔订单吗？"
-                                @confirm="confirmCancelOrder(record.id)"
-                                @cancel="cancelCancelOrder"
-                                okText="确定"
-                                cancelText="取消"
-                                v-if="record.orderState == '已预订'"
-                        >
-                            <a-button type="danger" size="small">撤销</a-button>
-                        </a-popconfirm>
-                        <a-divider type="vertical" v-if="record.orderState == '已入住'"></a-divider>
-                        <a-button type="primary" size="small" v-if="record.orderState == '已入住'"
-                                  @click="showRateModal(record.id)">评价</a-button>
-
-
-
-                    </span>
-                </a-table>
-            </a-tab-pane>
             <a-tab-pane tab="修改头像" key="3">
                 <a-form :form="form" style="margin-left: 100px;margin-top: 100px" class="avatar">
                     <img :src="myAvatar?myAvatar:require('../../assets/cover.jpeg')" alt="">
@@ -466,7 +423,7 @@
                 }
             },
             hotelDetail(record){
-                console.log(record)
+                //console.log(record)
                 this.findDetail(record);
                 this.$router.push({ name: 'hotelDetail', params: { hotelId: this.activeHotelId }})
             },
@@ -518,7 +475,7 @@
             },
             handlePassword(rule, value, callback) {
                 const originPassword = this.userInfo.password
-                console.log(originPassword)
+                //console.log(originPassword)
                 if (value === undefined) {
                     callback(new Error('请输入新密码'))
                 }
@@ -529,7 +486,7 @@
             },
             handlePasswordCheck(rule, value, callback) {
                 const password = this.form.getFieldValue('password')
-                console.log(password)
+                //console.log(password)
                 if (value === undefined) {
                     callback(new Error('请再次输入新密码'))
                 }
@@ -540,7 +497,7 @@
             },
             handleOriginPasswordCheck(rule, value, callback) {
                 const originPassword = this.userInfo.password
-                console.log(originPassword)
+                //console.log(originPassword)
                 if (value === undefined) {
                     callback(new Error('请输入原密码'))
                 }
@@ -608,7 +565,7 @@
             submit() {
                 // 确认弹窗回调
                 this.show = false
-                console.log("评价的orderid是", this.rateId, "评分是", this.rate)
+                //console.log("评价的orderid是", this.rateId, "评分是", this.rate)
                 let data1 = {
                     id: 0,
                     rate: 0
@@ -620,12 +577,12 @@
             },
             showRateModal(id) {
                 this.rateId = id
-                console.log(id)
+                //console.log(id)
                 this.show = true
             },
             changeRate(value){
                 this.rate=value
-                console.log("评分被改为",this.rate)
+                //console.log("评分被改为",this.rate)
             },
             detail(value){
                 this.set_currentOrderInfo(value)
@@ -644,9 +601,9 @@
                 this.personal=false
             },
             changeBirthday(date, dateString){
-                console.log(date, dateString);
+                //console.log(date, dateString);
                 this.birthdayInfo=moment(dateString).format('YYYY-MM-DD')
-                console.log(this.birthdayInfo)
+                //console.log(this.birthdayInfo)
             },
             registerVip(){
                 if(this.personal==true){
@@ -657,7 +614,7 @@
                                 userId: this.userId,
                                 type:"personal"
                             }
-                            console.log(data)
+                            //console.log(data)
                             this.registerVIP(data)
                         }
                     });
@@ -669,7 +626,7 @@
                                 userId: this.userId,
                                 type:"business"
                             }
-                            console.log(data)
+                            //console.log(data)
                             this.registerVIP(data)
                         }
                     });

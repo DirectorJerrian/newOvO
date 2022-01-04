@@ -120,7 +120,7 @@ export default {
             this.set_orderModalVisible(true)
         },
         handleAdd(record){
-            console.log(record)
+            //console.log(record)
             const data={
                 roomId:record.id
             }

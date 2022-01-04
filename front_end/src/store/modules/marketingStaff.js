@@ -31,7 +31,7 @@ const marketingStaff = {
     mutations: {
         set_TargetOderList: function(state, data) {
             state.targetorderList = data
-            console.log(data)
+            ////console.log(data)
         },
 
         set_userId: (state, data) => {
@@ -40,7 +40,7 @@ const marketingStaff = {
 
         set_allVoucherList: function (state,data) {
             state.allVoucherList=data
-            console.log(data)
+            ////console.log(data)
         },
         set_addAllVoucherVisible: function (state,data) {
             state.addAllVoucherVisible=data
@@ -52,18 +52,18 @@ const marketingStaff = {
             const data={
                 userId:Number(state.userId)
             }
-            console.log(data.userId)
+            //console.log(data.userId)
             const res = await getStrangeOrdersAPI()
             if(res){
                 commit('set_TargetOderList', res)
             }
         },
         addVouchertoAll: async ({state,dispatch,commit},data)=>{
-            console.log(data)
+            //console.log(data)
             const res=await addVoucherToAllAPI(data)
             if(res){
                 dispatch('getAllVoucher')
-                console.log(res)
+                //console.log(res)
             }
         },
         getAllVoucher: async ({state,commit})=>{

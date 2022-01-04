@@ -338,7 +338,7 @@ export default {
         },
         savingsCompute(){
             if(this.userInfo.vip===0) {
-                console.log("haha")
+                //console.log("haha")
                 this.realPrice=this.totalPrice-this.voucherDiscount-this.couponDiscount
             }
             else{
@@ -352,8 +352,8 @@ export default {
                     this.setSavings=0
                 }
                 this.realPrice=price-this.useSavings
-                console.log("123123")
-                console.log("使用会员储值"+this.useSavings+"剩余会员储值"+this.setSavings+"真正价格"+this.realPrice)
+                //console.log("123123")
+                //console.log("使用会员储值"+this.useSavings+"剩余会员储值"+this.setSavings+"真正价格"+this.realPrice)
             }
         },
         refresh(){

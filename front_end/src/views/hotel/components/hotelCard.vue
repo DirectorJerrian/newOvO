@@ -15,8 +15,9 @@
     <a-tooltip :title="hotel.title" placement="top">
       <a-card-meta :title="hotel.name">
       <template slot="description">
-        星级&nbsp;:&nbsp;&nbsp;<a-rate style="font-size: 15px" :value="getStar(hotel.hotelStar)" disabled allowHalf/>
-        <br>评分:{{hotel.rate}}
+        <p style="color: #181818; font-weight: bolder; display: inline; font-size: 18px">￥{{hotel.minimumPrice}}</p><p style="display: inline; font-size: 10px"> /晚起</p>
+<!--        星级&nbsp;:&nbsp;&nbsp;<a-rate style="font-size: 15px" :value="getStar(hotel.hotelStar)" disabled allowHalf/>-->
+        <br>评分: {{hotel.rate}}
       </template>
     </a-card-meta>
     </a-tooltip>
@@ -71,8 +72,8 @@ export default {
     var that=this
     that.set_currentHotelId(Number(that.hotel.id))
     await that.getUserHotelOrders(that.currentHotelId)
-    console.log(that.currentHotelId)
-    console.log(that.UserHotelOrderList)
+    //console.log(that.currentHotelId)
+    //console.log(that.UserHotelOrderList)
     for (var i = 0; i < that.UserHotelOrderList.length; i++) {
       if(that.UserHotelOrderList[i].orderState==='已入住' ||that.UserHotelOrderList[i].orderState==='已评价'){
         that.judgeOne=true;
@@ -123,10 +124,19 @@ export default {
   .ant-card-body{
     padding: 12px
   }
+  .ant-card-meta-title{
+    font-size: 16px;
+    letter-spacing:1px;
+    font-weight: bold;
+  }
 }
 
 .ant-card-hoverable:hover {
   box-shadow: 0 2px 8px rgba(0,0,0,0.4)
+}
+
+.ant-card-meta-detail > div:not(:last-child) {
+  margin-bottom: 6px;
 }
 
 </style>

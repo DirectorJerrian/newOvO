@@ -61,7 +61,7 @@ const hotelManager = {
     mutations: {
         set_TargetOderList: function (state, data) {
             state.targetorderList = data
-            console.log(data)
+            ////console.log(data)
         },
         set_addHotelModalVisible: function (state, data) {
             state.addHotelModalVisible = data
@@ -117,7 +117,7 @@ const hotelManager = {
     },
     actions: {
         updateCover: async({state},data) => {
-            console.log(data)
+            ////console.log(data)
             const res = await updateHotelCoverAPI(data,state.activeHotelId)
             if(res){
                 message.success('修改成功')
@@ -127,7 +127,7 @@ const hotelManager = {
             const data = {
                 userId: Number(state.userId)
             }
-            console.log(data.userId)
+            ////console.log(data.userId)
             const res = await getTargetOrderAPI(data)
             if (res) {
                 commit('set_TargetOderList', res)
@@ -228,7 +228,7 @@ const hotelManager = {
         },
         executeOrder: async({state,dispatch}) => {
             const res = await executeOrderAPI(state.activeOrderId)
-            console.log(res)
+            ////console.log(res)
             if(res.success){
                 dispatch('getTargetOrders')
                 message.success('入住成功')
@@ -239,7 +239,7 @@ const hotelManager = {
         hasType: async ({state,commit})=>{
             const res=await hasTypeAPI(state.activeHotelId)
             if(res){
-                console.log(res)
+                ////console.log(res)
                 commit('set_hasBig',res[0])
                 commit('set_hasDouble',res[1])
                 commit('set_hasFam',res[2])
@@ -248,12 +248,12 @@ const hotelManager = {
         deleteOrderOnly: async ({state,dispatch,commit})=>{
             const res= await deleteOrderOnlyAPI(state.activeOrderId)
             if(res){
-                console.log(res)
+                ////console.log(res)
                 dispatch('getTargetOrders')
             }
         },
         findDetail: async ({state,commit},data)=>{
-            console.log(data)
+            ////console.log(data)
             const res=await findHotelAPI(data)
             if(res){
                 commit('set_activeHotelId',res)

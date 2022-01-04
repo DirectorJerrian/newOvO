@@ -20,6 +20,7 @@ public class Hotel {
      */
     private Integer managerId;
     private String cover;
+    private Integer minimumPrice;
 
     public Integer getId() {
         return id;
@@ -96,5 +97,13 @@ public class Hotel {
     public String getCover() { return cover; }
 
     public void setCover(String cover) { this.cover = cover; }
+
+    public Integer getMinimumPrice() {
+        return minimumPrice;
+    }
+
+    public void setMinimumPrice(Integer minimumPrice) {
+        this.minimumPrice = minimumPrice;
+    }
 }
 

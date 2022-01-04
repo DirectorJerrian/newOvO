@@ -7,13 +7,13 @@
             <a-dropdown>
                 <a-menu slot="overlay" @click="handleMenuClick">
                     <a-menu-item key="1"><a-icon type="crown"></a-icon>
-                        星级
+                        星 级
                     </a-menu-item>
                     <a-menu-item key="2"><a-icon type="like"></a-icon>
-                        评分
+                        评 分
                     </a-menu-item>
                 </a-menu>
-                <a-button size="large" style="margin-left: 8px"> 排序方式 <a-icon type="down" /> </a-button>
+                <a-button size="large" style="margin-left: 8px; width: 120px" id="sortBtn"> 排序方式 <a-icon type="down" /> </a-button>
             </a-dropdown>
         </div>
         <div class="hotelList">
@@ -44,18 +44,19 @@ export default {
       searchModal,
   },
   data(){
-    return{
-      emptyBox: [{ name: 'box1' }, { name: 'box2'}, {name: 'box3'}],
-      pageSize: 8,
-    }
+      return{
+          emptyBox: [{ name: 'box1' }, { name: 'box2'}, {name: 'box3'}],
+          pageSize: 8,
+          sortOrder: 0, //0为未排序，1为评分降序，2为评分升序，3为星级降序，4为星级升序
+      }
   },
   async mounted() {
       const data = {
           pageNo: 0,
-          pageSize: 8
+          pageSize: 8,
       }
       await this.set_hotelListParams(data);
-      console.log(this.hotelListParams)
+      //console.log(this.hotelListParams)
       await this.getHotelList();
   },
   computed: {
@@ -75,7 +76,9 @@ export default {
       ...mapActions([
           'getHotelList',
           `StarSort`,
+          `StarSort2`,
           `RateSort`,
+          `RateSort2`,
       ]),
       pageChange(page, pageSize) {
           const data = {
@@ -93,13 +96,30 @@ export default {
           this.set_searchModalVisible(true)
       },
       handleMenuClick(e) {
-          console.log('click', e);
-          console.log(e.key)
+          //console.log('click', e);
+          //console.log(e.key)
           if(e.key==="2"){
-              this.RateSort()
+              console.log(this.sortOrder)
+              if (this.sortOrder === 1){
+                  this.RateSort2();
+                  this.sortOrder = 2;
+                  document.getElementById("sortBtn").innerHTML = "评&nbsp&nbsp&nbsp分&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp↑";
+              }else {
+                  this.RateSort();
+                  this.sortOrder = 1;
+                  document.getElementById("sortBtn").innerHTML = "评&nbsp&nbsp&nbsp分&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp↓";
+              }
           }
           else if(e.key==="1"){
-              this.StarSort()
+              if (this.sortOrder === 3) {
+                  this.StarSort();
+                  this.sortOrder = 4;
+                  document.getElementById("sortBtn").innerHTML = "星&nbsp&nbsp&nbsp级&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp↑";
+              }else {
+                  this.StarSort2();
+                  this.sortOrder = 3;
+                  document.getElementById("sortBtn").innerHTML = "星&nbsp&nbsp&nbsp级&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp↓";
+              }
           }
       },
 

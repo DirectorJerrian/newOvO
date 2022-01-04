@@ -11,7 +11,7 @@ const service = axios.create({
   baseURL: process.env.NODE_ENV === 'production' ? '': 'http://localhost:8080',
   withCredentials: true
 })
-console.log(process.env.NODE_ENV)
+//console.log(process.env.NODE_ENV)
  const err = (error) => { 
   if (error.response) {
     const data = error.response.data

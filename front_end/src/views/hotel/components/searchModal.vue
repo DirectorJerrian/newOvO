@@ -114,7 +114,7 @@
                             hotelStar: parseInt(this.form.getFieldValue('hotelStar')),
                             rate: Number(this.form.getFieldValue('rate')),
                         }
-                        console.log(data)
+                        //console.log(data)
                         if(data.hotelName===undefined){
                             data.hotelName=''
                         }
@@ -124,7 +124,7 @@
                         if(isNaN(data.rate)){
                             data.rate=0
                         }
-                        console.log(data)
+                        //console.log(data)
                         this.searchHotel(data)
                     }
                 });

@@ -110,7 +110,7 @@ export default {
                         "discountMoney": Number(this.form.getFieldValue('discount_money')),
                         "hotelId": this.activeHotelId
                     }
-                    console.log(data)
+                    //console.log(data)
                     this.addHotelCoupon(data)
                 }
             });

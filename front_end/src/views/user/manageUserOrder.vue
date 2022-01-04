@@ -17,6 +17,32 @@
                         <span v-if="text == 'DoubleBed'">双床房</span>
                         <span v-if="text == 'Family'">家庭房</span>
                     </span>
+            <div
+                    slot="filterDropdown"
+                    slot-scope="{setSelectedKeys, selectedKeys,confirm, clearFilters}"
+                    style="padding: 8px"
+            >
+                <a-date-picker v-model="datePicker" @change="e => setSelectedKeys(e ? [e.format('YYYY-MM-DD')] : [])"/>
+                <br>
+                <a-button
+                        type="primary"
+                        icon="search"
+                        size="small"
+                        style="width: 45%; margin-right: 19px; margin-top: 10px"
+                        @click="() => handleSearch(confirm,selectedKeys)"
+                >
+                    Search
+                </a-button>
+                <a-button size="small" style="width: 45%" @click="() => handleReset(clearFilters)">
+                    Reset
+                </a-button>
+            </div>
+            <a-icon
+                    slot="filterIcon"
+                    slot-scope="filtered"
+                    :style="{ color: filtered ? '#108ee9' : '#bfbfbf' }"
+                    type="filter"
+            />
             <a-tag slot="orderState" color="blue" slot-scope="text">
                 {{ text }}
             </a-tag>
@@ -56,7 +82,7 @@
         {
             title: '酒店名',
             key: 'hotelDetail',
-            dataIndex:'hotelName',
+            dataIndex: 'hotelName',
             scopedSlots: {customRender: 'hotelDetial'},//who spelled it???
         },
         {
@@ -66,8 +92,13 @@
         },
         {
             title: '入住时间',
+            onFilter: (filterDate, record) => record.checkInDate.includes(filterDate),
             dataIndex: 'checkInDate',
-            scopedSlots: {customRender: 'checkInDate'}
+            scopedSlots: {
+                customRender: 'checkInDate',
+                filterDropdown: 'filterDropdown',
+                filterIcon: 'filterIcon',
+            }
         },
         {
             title: '离店时间',
@@ -84,7 +115,10 @@
         },
         {
             title: '状态',
-            filters: [{text: '已预订', value: '已预订'}, {text: '已撤销', value: '已撤销'}, {text: '已入住', value: '已入住'}],
+            filters: [{text: '已预订', value: '已预订'}, {text: '已取消', value: '已取消'}, {
+                text: '已入住',
+                value: '已入住'
+            }, {text: '异常', value: '异常'}, {text: '已评价', value: '已评价'}],
             onFilter: (value, record) => record.orderState.includes(value),
             dataIndex: 'orderState',
             scopedSlots: {customRender: 'orderState'}
@@ -104,6 +138,8 @@
                 pagination: {},
                 columns,
                 form: this.$form.createForm(this, {name: 'manageUserOrder'}),
+                filterDate: '',
+                datePicker:undefined
             }
         },
         computed: {
@@ -122,7 +158,24 @@
                 'cancelOrder',
                 'orderRate',
             ]),
-            cancelCancelOrder() {},
+            cancelCancelOrder() {
+            },
+            confirmCancelOrder(orderId) {
+                this.cancelOrder(orderId)
+            },
+            // onChange(value) {
+            //     console.log(value.format('YYYY-MM-DD'));
+            //     this.filterDate=value.format('YYYY-MM-DD')
+            // },
+            handleReset(clearFilters) {
+                clearFilters();
+                // this.filterDate = '';
+                this.datePicker=undefined
+            },
+            handleSearch(confirm,selectedKeys) {
+                confirm();
+                this.filterDate = selectedKeys[0];
+            },
         }
     }
 </script>
@@ -138,19 +191,9 @@
 
 </style>
 <style lang="less">
-    .manageHotel-wrapper {
-        .ant-tabs-bar {
-            padding-left: 30px
-        }
-    }
-</style>
-<style lang="less">
     .manageUserOrder-wrapper {
         .ant-tabs-bar {
             padding-left: 30px
         }
     }
-</style>
-<style lang="less">
-
 </style>

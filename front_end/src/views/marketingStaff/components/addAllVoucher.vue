@@ -100,7 +100,7 @@
                             "status":"未添加"
 
                         }
-                        console.log(data)
+                        //console.log(data)
                         this.addVoucher(data)
                     }
                 });

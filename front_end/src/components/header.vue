@@ -140,7 +140,7 @@
                 this.$router.push(`/hotel/hotelList`)
             },
             switchTab(key) {
-                console.log(key)
+                ////console.log(key)
                 if (key == '1') this.current = ['1']
                 else if (key == '2') this.current = ['2']
             }

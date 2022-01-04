@@ -75,7 +75,7 @@
 /*            const _this = this
             window.onpageshow = () => {
                 _this.getHotelInfo()
-                console.log("test1")
+                //console.log("test1")
                 _this.coverImg=this.currentHotelInfo.cover,
                 _this.form.setFieldsValue({
                     'hotelName': this.currentHotelInfo.name,

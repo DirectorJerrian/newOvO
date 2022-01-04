@@ -3,8 +3,8 @@
 <mapper namespace="com.example.hotel.data.hotel.HotelMapper">
     <insert id="insertHotel" parameterType="com.example.hotel.po.Hotel"
     useGeneratedKeys="true" keyProperty="id">
-        insert into Hotel(address,city,hotelDescription,hotelStar,hotelName,phoneNum,rate,manager_id)
-        values (#{address},#{city},#{description},#{hotelStar},#{hotelName},#{phoneNum},#{rate},#{managerId})
+        insert into Hotel(address,city,hotelDescription,hotelStar,hotelName,phoneNum,rate,manager_id,cover,minimumPrice)
+        values (#{address},#{city},#{description},#{hotelStar},#{hotelName},#{phoneNum},#{rate},#{managerId},#{cover},#{minimumPrice})
     </insert>
 
     <delete id="deleteHotel">
@@ -57,6 +57,7 @@
         <result column="rate" property="rate"></result>
         <result column="manager_id" property="managerId"></result>
         <result column="cover" property="cover"></result>
+        <result column="minimumPrice" property="minimumPrice"></result>
 
     </resultMap>
 

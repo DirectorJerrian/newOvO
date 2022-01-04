@@ -33,7 +33,7 @@ export function updateHotelInfoAPI(data) {
 export function updateHotelCoverAPI(data,id) {
     let fd = new FormData(); //通过form数据格式来传\
     fd.append("file", data.coverFile);
-    console.log(fd.get('file'));
+    ////console.log(fd.get('file'));
     return axios({
         withCredentials: true,
         headers: {

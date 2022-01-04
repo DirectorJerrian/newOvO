@@ -122,7 +122,7 @@ const user = {
         },
         set_userAvailableVoucherList:(state,data)=>{
             state.userAvailableVoucherList=data
-            console.log(state.userAvailableVoucherList.length)
+            //console.log(state.userAvailableVoucherList.length)
         },
         set_UserHotelOrderList:(state,data)=>{
             state.UserHotelOrderList=data
@@ -244,7 +244,7 @@ const user = {
             const data = {
                 userId: Number(state.userId)
             }
-            console.log(state.userInfo)
+            //console.log(state.userInfo)
             const res = await getUserOrdersAPI(data)
             if(res){
                 commit('set_userOrderList', res)
@@ -254,7 +254,7 @@ const user = {
             const data = {
                 id: state.userId,
             }
-            console.log(state.userCreditRecord)
+            //console.log(state.userCreditRecord)
             const res = await getUserCreditRecordAPI(data)
             if(res){
                 commit('set_userCreditRecord',res)
@@ -296,15 +296,15 @@ const user = {
             const data = {
                 userId: Number(state.userId)
             }
-            console.log(data.userId)
+            //console.log(data.userId)
             const res = await userVoucherAPI(data.userId)
             if(res){
                 commit('set_userVoucherList', res)
             }
         },
         getUserAvailableVoucherList: async({ state, commit },data) => {
-            console.log("1231")
-            console.log(data)
+            //console.log("1231")
+            //console.log(data)
             const res = await userAvailableVoucherAPI(data)
 
             if(res){
@@ -321,7 +321,7 @@ const user = {
             }
         },
         setUserSavings: async({ state, dispatch }, savings) => {
-            console.log(savings)
+            //console.log(savings)
             const res = await setSavingsAPI(savings)
             if(res) {
                 await message.success('储蓄值使用成功')
