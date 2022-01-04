@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="search">
-            <Input.Group compact>
+            <a-input-group size="large" compact>
                 <a-select
                         v-model="searchForm.city"
                         :not-found-content="null"
@@ -31,23 +31,25 @@
                     ]"
                         :placeholder="['入住日期','退房日期']"
                 />
-                <a-button icon="search"  @click="search">
+                <a-button icon="search" size="large" @click="search">
                 </a-button>
-                <a-icon type="lock"></a-icon>
-            </Input.Group>
+                <a-button icon="rollback" size="large" v-if="isSearched" @click="goBackClick">
+                </a-button>
+                <a-dropdown>
+                    <a-menu slot="overlay" @click="handleMenuClick">
+                        <a-menu-item key="1"><a-icon type="crown"></a-icon>
+                            星级
+                        </a-menu-item>
+                        <a-menu-item key="2"><a-icon type="like"></a-icon>
+                            评分
+                        </a-menu-item>
+                    </a-menu>
+                    <a-button size="large" style="float: right;margin-right: 50px"> 排序方式 <a-icon type="down" /> </a-button>
+                </a-dropdown>
+            </a-input-group>
 
 
-            <a-dropdown>
-                <a-menu slot="overlay" @click="handleMenuClick">
-                    <a-menu-item key="1"><a-icon type="crown"></a-icon>
-                        星级
-                    </a-menu-item>
-                    <a-menu-item key="2"><a-icon type="like"></a-icon>
-                        评分
-                    </a-menu-item>
-                </a-menu>
-                <a-button size="large" style="float: right;margin-right: 50px"> 排序方式 <a-icon type="down" /> </a-button>
-            </a-dropdown>
+
         </div>
         <div class="hotelList">
             <a-layout class="test">
@@ -66,7 +68,6 @@
     </div>
 </template>
 <script>
-
 import HotelCard from './components/hotelCard';
 import searchModal from "./components/searchModal";
 import { mapGetters, mapActions, mapMutations } from 'vuex'
@@ -79,6 +80,7 @@ export default {
   },
   data(){
     return{
+        isSearched:false,
         emptyBox: [{ name: 'box1' }, { name: 'box2'}, {name: 'box3'}],
         pageSize: 8,
         cityList:['北京','南京','上海'],
@@ -118,6 +120,10 @@ export default {
           `RateSort`,
           `searchHotel`,
       ]),
+      async goBackClick(){
+          await this.getHotelList();
+          this.isSearched=false;
+      },
       handleCityChange(val){
           this.searchForm.city=val;
       },
@@ -136,8 +142,9 @@ export default {
       jumpToDetails(id){
           this.$router.push({ name: 'hotelDetail', params: { hotelId: id }})
       },
-      search(){
-          this.searchHotel(this.searchForm);
+      async search(){
+          const success=await this.searchHotel(this.searchForm);
+          if(success)this.isSearched=true;
           // this.set_searchModalVisible(true)
       },
       handleMenuClick(e) {
