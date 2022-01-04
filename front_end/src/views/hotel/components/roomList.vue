@@ -153,6 +153,7 @@ export default {
         ])
     },
     monuted() {
+
     },
     methods: {
         ...mapMutations([
@@ -162,7 +163,8 @@ export default {
         ]),
         ...mapActions([
             'addNum',
-            'subNum'
+            'subNum',
+
         ]),
         order(record) {
             this.set_currentOrderRoom(record)

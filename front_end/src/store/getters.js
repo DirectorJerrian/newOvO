@@ -56,6 +56,7 @@ const getters = {
   currentHotelComments: state=>state.comment.comments,
   currentCommentId: state=>state.comment.commentId,
     currentCommentInfo: state=>state.comment.currentCommentInfo,
+  comments:state=>state.comment.comments,
   }
 
   export default getters

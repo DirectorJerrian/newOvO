@@ -48,6 +48,12 @@ const comment = {
                 ...data,
             }
         },
+        getUserComments: async ({state, commit},data) => {
+            const res = await getUserCommentsAPI({userId:data});
+            if (res) {
+                commit('set_comments', res)
+            }
+        },
     },
 }
 
