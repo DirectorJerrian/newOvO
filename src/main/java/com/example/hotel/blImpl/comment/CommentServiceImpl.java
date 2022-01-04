@@ -52,4 +52,11 @@ public class CommentServiceImpl implements CommentService {
         return commentList;
     };
 
+    //通过评论Id获取该评论
+    @Override
+    public Comment getCommentByCommentId(Integer commentId){
+        Comment comment=commentMapper.selectByCommentId(commentId);
+        return comment;
+    };
+
 }
