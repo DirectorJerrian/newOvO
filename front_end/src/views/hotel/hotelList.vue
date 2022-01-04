@@ -4,11 +4,13 @@
             <a-input-group size="large" compact>
                 <a-select
                         v-model="searchForm.city"
+                        :show-search="true"
                         :not-found-content="null"
                         :filter-option="true"
                         :allowClear="true"
-                        style="width: 120px;font-weight: bold;text-align: center"
+                        style="width: 120px;font-weight: bold;"
                         placeholder="入住城市"
+                        @search="handleCitySearch"
                         @blur="handleCityBlur"
                         @change="handleCityChange"
                 >
@@ -127,8 +129,11 @@ export default {
           await this.getHotelList();
           this.isSearched=false;
       },
+      handleCitySearch(val){
+          this.handleCityChange(val);
+      },
       handleCityChange(val){
-          this.searchForm.city=val;
+          this.searchForm.city = (val != null && val != '') ? val : undefined
       },
       handleCityBlur(val){
         this.searchForm.city=val;
