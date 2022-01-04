@@ -366,7 +366,7 @@ CREATE TABLE `Comments`
     `comments`    varchar(255) default null,
     `create_time`    datetime default null,
     `orderId`       int(11)     not null,
-    FOREIGN KEY (`orderId`) REFERENCES OrderList(`id`)
+    FOREIGN KEY (`orderId`) REFERENCES OrderList(`id`),
     primary key (`id`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 12
