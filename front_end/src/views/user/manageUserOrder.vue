@@ -161,20 +161,24 @@
             ...mapGetters([
                 'userId',
                 'userOrderList',
+                'comments'
             ]),
         },
         async mounted() {
-            await this.getUserOrders()
+            await this.getUserOrders();
+
         },
         methods: {
             ...mapMutations([
                 'set_viewModalVisible',
                 'set_currentOrderInfo',
+                'set_commentInDetail',
             ]),
             ...mapActions([
                 'getUserOrders',
                 'cancelOrder',
                 'orderRate',
+                'getUserComments',
             ]),
             cancelCancelOrder() {
             },
@@ -222,7 +226,16 @@
                 this.rate=value
                 //console.log("评分被改为",this.rate)
             },
-            detail(value){
+            async detail(value){
+                await this.getUserComments(this.userId);
+                var goal='';
+                for(var i=0;i<this.comments.length;i++){
+                    if(this.comments[i].orderId==value.id){
+                        goal=this.comments[i].comments;
+                        break;
+                    }
+                }
+                this.set_commentInDetail(goal);
                 this.set_currentOrderInfo(value)
                 this.set_viewModalVisible(true)
             },

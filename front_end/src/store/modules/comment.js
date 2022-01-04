@@ -9,6 +9,7 @@ import { message } from 'ant-design-vue'
 const comment = {
     state: {
         comments: [],
+        commentInDetail:'',
         currentHotelId: '',
     },
 
@@ -18,6 +19,9 @@ const comment = {
         },
         set_curHotelId: function (state, data) {
             state.currentHotelId = data
+        },
+        set_commentInDetail: function (state, data) {
+            state.commentInDetail = data
         },
     },
 
@@ -31,6 +35,7 @@ const comment = {
             }
         },
         getUserComments: async ({state, commit},data) => {
+            console.log("传入的数据"+data);
             const res = await getUserCommentsAPI({userId:data});
             if (res) {
                 commit('set_comments', res)

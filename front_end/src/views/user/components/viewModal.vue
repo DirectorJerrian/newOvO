@@ -41,7 +41,7 @@
         </div>
         <div class="a">
             <span class="l">订单评价:</span>
-            <span class="r">{{this.comment}}</span>
+            <span class="r">{{commentInDetail}}</span>
         </div>
     </a-modal>
 </template>
@@ -54,7 +54,6 @@
 
         data(){
             return{
-                comment:'',
             }
         },
         computed:{
@@ -62,25 +61,14 @@
                 'viewModalVisible',
                 'currentOrderInfo',
                 'userId',
-                'comments',
+                'commentInDetail'
             ]),
         },
         async mounted(){
-            await this.getUserComments(this.userId);
-            console.log(this.comments);
-            for(var i=0;i<this.comments.length;i++){
-                if(this.comments[i].orderId==this.currentOrderInfo.id){
-                    this.comment=this.comments[i].comments;
-                    break;
-                }
-            }
-            console.log(this.comment);
         },
         methods:{
             ...mapMutations([
                 'set_viewModalVisible',
-
-
             ]),
             ...mapActions([
                 'addNum',

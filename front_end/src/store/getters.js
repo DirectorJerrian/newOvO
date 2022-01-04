@@ -24,6 +24,7 @@ const getters = {
   viewModalVisible: state=> state.user.viewModalVisible,
   currentOrderId:state=> state.user.currentOrderId,
   currentOrderInfo:state=>state.user.currentOrderInfo,
+  commentInDetail:state=>state.comment.commentInDetail,
   userVoucherList: state=> state.user.userVoucherList,
   orderPass: state=>state.hotel.orderPass,
   UserHotelOrderList: state=>state.user.UserHotelOrderList,
