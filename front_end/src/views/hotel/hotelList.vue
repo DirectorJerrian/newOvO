@@ -1,9 +1,42 @@
 <template>
     <div>
         <div class="search">
-            <a-button icon="search" size="large" @click="search">
-                精确搜索
-            </a-button>
+            <Input.Group compact>
+                <a-select
+                        v-model="searchForm.city"
+                        :not-found-content="null"
+                        :filter-option="true"
+                        :allowClear="true"
+                        style="width: 150px"
+                        placeholder="入住城市"
+                        @blur="handleCityBlur"
+                        @change="handleCityChange"
+                >
+                    <a-select-option
+                            v-for="(item,index) in cityList"
+                            :key="index"
+                            :value="item"
+                    >
+                        {{ item }}
+                    </a-select-option>
+                </a-select>
+                <a-range-picker
+                        format="YYYY-MM-DD"
+                        @change="changeDate"
+                        v-decorator="[
+                        'date',
+                        {
+                            rules: [{ required: true, message: '请选择入住时间' }]
+                        }
+                    ]"
+                        :placeholder="['入住日期','退房日期']"
+                />
+                <a-button icon="search"  @click="search">
+                </a-button>
+                <a-icon type="lock"></a-icon>
+            </Input.Group>
+
+
             <a-dropdown>
                 <a-menu slot="overlay" @click="handleMenuClick">
                     <a-menu-item key="1"><a-icon type="crown"></a-icon>
@@ -13,7 +46,7 @@
                         评分
                     </a-menu-item>
                 </a-menu>
-                <a-button size="large" style="margin-left: 8px"> 排序方式 <a-icon type="down" /> </a-button>
+                <a-button size="large" style="float: right;margin-right: 50px"> 排序方式 <a-icon type="down" /> </a-button>
             </a-dropdown>
         </div>
         <div class="hotelList">
@@ -33,10 +66,11 @@
     </div>
 </template>
 <script>
+
 import HotelCard from './components/hotelCard';
 import searchModal from "./components/searchModal";
 import { mapGetters, mapActions, mapMutations } from 'vuex'
-
+const moment = require('moment')
 export default {
   name: 'home',
   components: {
@@ -45,8 +79,14 @@ export default {
   },
   data(){
     return{
-      emptyBox: [{ name: 'box1' }, { name: 'box2'}, {name: 'box3'}],
-      pageSize: 8,
+        emptyBox: [{ name: 'box1' }, { name: 'box2'}, {name: 'box3'}],
+        pageSize: 8,
+        cityList:['北京','南京','上海'],
+        searchForm:{
+            city:'',
+            checkInDate:'',
+            checkOutDate:'',
+        }
     }
   },
   async mounted() {
@@ -76,7 +116,14 @@ export default {
           'getHotelList',
           `StarSort`,
           `RateSort`,
+          `searchHotel`,
       ]),
+      handleCityChange(val){
+          this.searchForm.city=val;
+      },
+      handleCityBlur(val){
+        this.searchForm.city=val;
+      },
       pageChange(page, pageSize) {
           const data = {
               pageNo: page - 1
@@ -90,7 +137,8 @@ export default {
           this.$router.push({ name: 'hotelDetail', params: { hotelId: id }})
       },
       search(){
-          this.set_searchModalVisible(true)
+          this.searchHotel(this.searchForm);
+          // this.set_searchModalVisible(true)
       },
       handleMenuClick(e) {
           console.log('click', e);
@@ -102,6 +150,10 @@ export default {
               this.StarSort()
           }
       },
+      changeDate(v){
+          this.searchForm.checkInDate=moment(v[0]).format('YYYY-MM-DD');
+          this.searchForm.checkOutDate=moment(v[1]).format('YYYY-MM-DD');
+      }
 
   }
 }
