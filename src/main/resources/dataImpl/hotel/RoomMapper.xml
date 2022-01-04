@@ -21,12 +21,12 @@
         update Room set curNum=curNum-#{curNum} where hotel_id=#{hotelId} and roomType=#{roomType}
     </update>
 
-    <select id="getRoomTotalNum" resultType="int">
+    <select id="getRoomTotalNum" resultType="Integer">
         select total from Room where hotel_id=#{hotelId} and roomType=#{roomType}
     </select>
 
     <select id="addTargetNum" resultMap="room">
-        update Room set total=total+1 curNum=curNum+1 where id=#{roomId}
+        update Room set total=total+1,curNum=curNum+1 where id=#{roomId}
     </select>
 
     <select id="subTargetNum" >

@@ -58,6 +58,11 @@ const routes = [
         path:`/marketingStaff/creditCharge`,
         name:'creditCharge',
         component:()=>import(`@/views/marketingStaff/chargeCredit`)
+      },
+      {
+        path:`/user/manageUserOrder`,
+        name:'manageUserOrder',
+        component:()=>import(`@/views/user/manageUserOrder`)
       }
     ]
   },

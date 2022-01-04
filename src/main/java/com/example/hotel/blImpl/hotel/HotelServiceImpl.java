@@ -146,9 +146,9 @@ public class HotelServiceImpl implements HotelService {
         List<HotelVO> ans=new ArrayList<>();
         for(int i=0; i<first.size(); i++){
             HotelVO hotel = first.get(i);
-            if(getRoomCurNum(hotel.getId(), RoomType.BigBed.toString(), checkInDate, checkOutDate)>0
-                || getRoomCurNum(hotel.getId(), RoomType.DoubleBed.toString(), checkInDate, checkOutDate)>0
-                || getRoomCurNum(hotel.getId(), RoomType.Family.toString(), checkInDate, checkOutDate)>0){
+            if(getRoomCurNum(hotel.getId(), "BigBed", checkInDate, checkOutDate)>0
+                || getRoomCurNum(hotel.getId(), "Double", checkInDate, checkOutDate)>0
+                || getRoomCurNum(hotel.getId(), "Family", checkInDate, checkOutDate)>0){
                     ans.add(hotel);
             }
         }
