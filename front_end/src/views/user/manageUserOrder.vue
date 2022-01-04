@@ -238,13 +238,12 @@
                     }
                 }
                 this.set_commentInDetail(goal);
+                this.set_currentOrderInfo(value);
+                this.set_viewModalVisible(true);
+            },
             changeText(value){
                 this.comments = value;
                 //console.log(value);
-            },
-            detail(value){
-                this.set_currentOrderInfo(value)
-                this.set_viewModalVisible(true)
             },
         }
     }
