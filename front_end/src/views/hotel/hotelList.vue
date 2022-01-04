@@ -76,6 +76,7 @@ export default {
           'getHotelList',
           `StarSort`,
           `RateSort`,
+          'getHotelComments',
       ]),
       pageChange(page, pageSize) {
           const data = {

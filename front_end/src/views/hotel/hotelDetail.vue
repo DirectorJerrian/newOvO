@@ -64,6 +64,9 @@
                         >
                         </a-table>
                     </a-tab-pane>
+                    <a-tab-pane tab="酒店评论" key="3">
+                        <CommentList :comments="currentHotelComments"></CommentList>
+                    </a-tab-pane>
                 </a-tabs>
             </div>
         </a-layout-content>
@@ -72,6 +75,7 @@
 <script>
 import { mapGetters, mapActions, mapMutations } from 'vuex'
 import RoomList from './components/roomList'
+import CommentList from './components/commentList'
 const columns=[
     {
         title: '订单号',
@@ -116,6 +120,7 @@ export default {
     name: 'hotelDetail',
     components: {
         RoomList,
+        CommentList,
     },
     data() {
         return {
@@ -127,27 +132,34 @@ export default {
             'currentHotelInfo',
             'UserHotelOrderList',
             'currentHotelId',
+            'currentHotelComments',
         ])
     },
     mounted() {
         this.set_currentHotelId(Number(this.$route.params.hotelId))
         this.getHotelById()
         this.getUserHotelOrders(this.currentHotelId)
+
+        this.set_curHotelId(Number(this.$route.params.hotelId))
+        this.getHotelComments();
     },
     beforeRouteUpdate(to, from, next) {
         this.set_currentHotelId(Number(to.params.hotelId))
         this.getHotelById()
         this.getUserHotelOrders(this.currentHotelId)
+
         next()
     },
     methods: {
         ...mapMutations([
             'set_currentHotelId',
+            'set_curHotelId',
         ]),
         ...mapActions([
             'getHotelById',
             'getUserOrders',
-            'getUserHotelOrders'
+            'getUserHotelOrders',
+            'getHotelComments',
         ]),
         getStar(data){
             if(data=="Four") return 4;

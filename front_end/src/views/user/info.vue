@@ -123,6 +123,46 @@
                     </span>
                 </a-table>
             </a-tab-pane>
+            <a-tab-pane tab="我的评价" key="7" v-if="userInfo.userType==='Client'">
+                <a-table
+                        :columns="columns"
+                        :dataSource="userOrderList"
+                        rowKey="id"
+                        bordered
+                >
+                    <span slot="hotelDetial" slot-scope="record">
+                         <a-button type="link" :size="size" @click="hotelDetail(record)">{{record}}</a-button>
+                    </span>
+                    <span slot="price" slot-scope="text">
+                        <span>￥{{ text }}</span>
+                    </span>
+                    <span slot="roomType" slot-scope="text">
+                        <span v-if="text == 'BigBed'">大床房</span>
+                        <span v-if="text == 'DoubleBed'">双床房</span>
+                        <span v-if="text == 'Family'">家庭房</span>
+                    </span>
+                    <a-tag slot="orderState" color="blue" slot-scope="text">
+                        {{ text }}
+                    </a-tag>
+                    <span slot="action" slot-scope="record">
+                        <a-button type="default" size="small" @click="detail(record)">查看</a-button>
+                        <a-divider type="vertical" v-if="record.orderState == '已预订'"></a-divider>
+                        <a-popconfirm
+                                title="你确定撤销该笔订单吗？"
+                                @confirm="confirmCancelOrder(record.id)"
+                                @cancel="cancelCancelOrder"
+                                okText="确定"
+                                cancelText="取消"
+                                v-if="record.orderState == '已预订'"
+                        >
+                            <a-button type="danger" size="small">撤销</a-button>
+                        </a-popconfirm>
+                        <a-divider type="vertical" v-if="record.orderState == '已入住'"></a-divider>
+                        <a-button type="primary" size="small" v-if="record.orderState == '已入住'"
+                                  @click="showRateModal(record.id)">评价</a-button>
+                    </span>
+                </a-table>
+            </a-tab-pane>
             <a-tab-pane tab="修改头像" key="3">
                 <a-form :form="form" style="margin-left: 100px;margin-top: 100px" class="avatar">
                     <img :src="myAvatar?myAvatar:require('../../assets/cover.jpeg')" alt="">
