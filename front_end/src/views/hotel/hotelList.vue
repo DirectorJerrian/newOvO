@@ -7,7 +7,7 @@
                         :not-found-content="null"
                         :filter-option="true"
                         :allowClear="true"
-                        style="width: 150px"
+                        style="width: 120px;font-weight: bold;text-align: center"
                         placeholder="入住城市"
                         @blur="handleCityBlur"
                         @change="handleCityChange"
@@ -86,7 +86,6 @@ export default {
           sortOrder: 0, //0为未排序，1为评分降序，2为评分升序，3为星级降序，4为星级升序
           cityList:['北京','南京','上海'],
           searchForm:{
-              city:'',
               checkInDate:'',
               checkOutDate:'',
           }
@@ -106,7 +105,8 @@ export default {
         'hotelList',
         'hotelListLoading',
         'searchModalVisible',
-        'hotelListParams'
+        'hotelListParams',
+
     ])
   },
   methods: {

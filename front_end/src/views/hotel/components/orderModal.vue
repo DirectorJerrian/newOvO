@@ -262,7 +262,8 @@ export default {
     },
     methods: {
         ...mapMutations([
-            'set_orderModalVisible'
+            'set_orderModalVisible',
+            'set_orderInfoVisible'
         ]),
         ...mapActions([
             'addOrder',
@@ -359,9 +360,9 @@ export default {
         refresh(){
             this.$router.go(0)
         },
-        handleSubmit(e) {
+        async handleSubmit(e) {
             e.preventDefault();
-             this.form.validateFieldsAndScroll((err, values) => {
+             this.form.validateFieldsAndScroll(async (err, values) => {
                 if (!err) {
                     const data = {
                         hotelId: this.currentHotelId,
@@ -389,9 +390,8 @@ export default {
                              this.useVoucher(Number(this.useVoucherId))
                          }
                          if(orderPass){
-                             this.timer = setTimeout(()=>{   //设置延迟执行
-                                 this.refresh()
-                             },1000);
+                             this.set_orderModalVisible(false);
+                             this.set_orderInfoVisible(true);
                          }
                      })
                 }

@@ -28,6 +28,7 @@ const hotel = {
         currentHotelId: '',
         currentHotelInfo: {},
         orderModalVisible: false,
+        orderInfoVisible:false,
         searchModalVisible: false,
         orderMatchCouponList: [],
         currentOrderRoom: {},
@@ -69,6 +70,9 @@ const hotel = {
         },
         set_orderModalVisible: function (state, data) {
             state.orderModalVisible = data
+        },
+        set_orderInfoVisible: function (state, data) {
+            state.orderInfoVisible = data
         },
         set_searchModalVisible: function (state, data) {
             state.searchModalVisible = data
