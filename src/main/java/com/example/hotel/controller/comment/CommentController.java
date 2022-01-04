@@ -32,4 +32,9 @@ public class CommentController {
     public ResponseVO getHotelComments(@PathVariable Integer hotelId){
         return ResponseVO.buildSuccess(commentService.getCommentsByHotelId(hotelId));
     }
+
+    @GetMapping("/{commentId}/getComment")
+    public ResponseVO getComment(@PathVariable Integer commentId){
+        return ResponseVO.buildSuccess(commentService.getCommentByCommentId(commentId));
+    }
 }

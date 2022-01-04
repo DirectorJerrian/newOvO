@@ -50,6 +50,8 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public List<Comment> getCommentsByUserId(Integer userId){
         List<Comment> commentList=commentMapper.selectByUserId(userId);
+        System.out.println("订单id");
+        System.out.println(commentList.get(0).getOrderId());
         return commentList;
     }
 
@@ -59,5 +61,12 @@ public class CommentServiceImpl implements CommentService {
         List<Comment> commentList=commentMapper.selectByHotelId(hotelId);
         return commentList;
     }
+
+    //通过评论Id获取该评论
+    @Override
+    public Comment getCommentByCommentId(Integer commentId){
+        Comment comment=commentMapper.selectByCommentId(commentId);
+        return comment;
+    };
 
 }

@@ -39,6 +39,10 @@
             <span class="l">价格:</span>
             <span class="r">{{currentOrderInfo.price}}</span>
         </div>
+        <div class="a">
+            <span class="l">订单评价:</span>
+            <span class="r">{{this.comment}}</span>
+        </div>
     </a-modal>
 </template>
 
@@ -50,20 +54,39 @@
 
         data(){
             return{
-
+                comment:'',
             }
         },
         computed:{
             ...mapGetters([
                 'viewModalVisible',
-                'currentOrderInfo'
+                'currentOrderInfo',
+                'userId',
+                'comments',
             ]),
         },
-        mounted(){
+        async mounted(){
+            await this.getUserComments(this.userId);
+            console.log(this.comments);
+            for(var i=0;i<this.comments.length;i++){
+                if(this.comments[i].orderId==this.currentOrderInfo.id){
+                    this.comment=this.comments[i].comments;
+                    break;
+                }
+            }
+            console.log(this.comment);
         },
         methods:{
             ...mapMutations([
                 'set_viewModalVisible',
+
+
+            ]),
+            ...mapActions([
+                'addNum',
+                'subNum',
+                'getUserComments',
+
             ]),
             cancel(){
                 //console.log(this.currentOrderInfo)
