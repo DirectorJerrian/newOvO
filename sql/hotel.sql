@@ -363,7 +363,7 @@ CREATE TABLE `Comments`
     `userName`    varchar(255)   DEFAULT null,
     `hotelId`      int(11)        DEFAULT null,
     `hotelName`    varchar(255)   DEFAULT null,
-    `comments`    varchar(255) default null,
+    `comments`    varchar(1024) default null,
     `create_time`    datetime default null,
     `orderId`       int(11)     not null,
     FOREIGN KEY (`orderId`) REFERENCES OrderList(`id`),
